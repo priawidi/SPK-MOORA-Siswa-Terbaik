@@ -20,7 +20,7 @@ class Kriteria extends Migration
                 'constraint' => 128,
             ],
             'kode_kriteria' => [
-                'type' => 'INT',
+                'type' => 'VARCHAR',
                 'constraint' => 8,
             ],
             'jenis_nilai' => [
@@ -30,18 +30,7 @@ class Kriteria extends Migration
             'bobot_nilai' => [
                 'type' => 'float',
             ],
-            'created_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
-            'updated_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
-            'deleted_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
+
         ]);
         $this->forge->addKey('id_kriteria', true);
         $this->forge->createTable('kriteria', true);

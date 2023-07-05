@@ -53,9 +53,9 @@ $routes->get('/detailsiswa/(:num)', 'AdminController::detail_siswa/$1', ['filter
 //NILAI
 $routes->get('/kriteria', 'AdminController::kriteria', ['filter' => 'authGuard']);
 $routes->match(['get', 'post'], '/addkriteria', 'AdminController::add_kriteria', ['filter' => 'authGuard']);
-$routes->match(['get', 'post'], '/deletesiswa/(:num)', 'AdminController::delete_siswa/$1', ['filter' => 'authGuard']);
-$routes->match(['get', 'post'], '/editsiswa/(:num)', 'AdminController::edit_siswa/$1');
-$routes->get('/detailsiswa/(:num)', 'AdminController::detail_siswa/$1', ['filter' => 'authGuard']);
+$routes->match(['get', 'post'], '/deletekriteria/(:num)', 'AdminController::delete_kriteria/$1', ['filter' => 'authGuard']);
+$routes->match(['get', 'post'], '/editkriteria/(:num)', 'AdminController::edit_kriteria/$1');
+$routes->get('/detailkriteria/(:num)', 'AdminController::detail_kriteria/$1', ['filter' => 'authGuard']);
 /*
 
  * --------------------------------------------------------------------

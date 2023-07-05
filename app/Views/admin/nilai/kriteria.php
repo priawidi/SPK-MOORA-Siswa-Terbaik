@@ -46,7 +46,7 @@
                                 <td><?php echo $val['bobot_nilai'] ?></td>
                                 <td>
 
-                                    <a class="badge badge-secondary" href="<?php echo site_url(); ?>detailsiswa/<?php echo $sis['id_siswa']; ?>">
+                                    <a class="badge badge-secondary" href="<?php echo site_url(); ?>detailkriteria/<?php echo $val['id_kriteria']; ?>">
                                         Detail
                                     </a>
 

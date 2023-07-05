@@ -39,26 +39,14 @@ class Siswa extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 20,
             ],
-            'created_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
-            'updated_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
-            'deleted_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
+
         ]);
         $this->forge->addKey('id_siswa', true);
-        $this->forge->createTable('siswa',true);
+        $this->forge->createTable('siswa', true);
     }
 
     public function down()
     {
         $this->forge->dropTable('siswa');
     }
-    
 }
