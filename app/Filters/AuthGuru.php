@@ -6,13 +6,12 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-
-class AuthAdmin implements FilterInterface
+class AuthGuru implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
+        if (session()->role != 1 && session()->role != 2) {
 
-        if (session()->role != 1) {
             return redirect()->to('/login');
         }
     }

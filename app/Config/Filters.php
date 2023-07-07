@@ -23,6 +23,9 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'authGuard' => \App\Filters\AuthGuard::class,
         'authAdmin' => \App\Filters\AuthAdmin::class,
+        'authGuru' => \App\Filters\AuthGuru::class,
+
+
 
     ];
 
