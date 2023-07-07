@@ -39,7 +39,7 @@ $routes->get('/admin', 'AdminController::index', ['filter' => 'authGuard']);
 $routes->get('/guru', 'GuruController::index', ['filter' => 'authGuard']);
 $routes->get('/siswa', 'SiswaController::index', ['filter' => 'authGuard']);
 //USER
-$routes->get('/user', 'AdminController::manajemen_user', ['filter' => 'authGuard']);
+$routes->get('/user', 'AdminController::manajemen_user', ['filter' => ['authGuard', 'authAdmin']]);
 $routes->match(['get', 'post'], '/adduser', 'AdminController::add_user', ['filter' => 'authGuard']);
 $routes->match(['get', 'post'], '/deleteuser/(:num)', 'AdminController::delete_user/$1', ['filter' => 'authGuard']);
 $routes->match(['get', 'post'], '/edituser/(:num)', 'AdminController::edit_user/$1');

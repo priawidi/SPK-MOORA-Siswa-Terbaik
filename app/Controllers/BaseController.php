@@ -8,6 +8,12 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use App\Models\UserModel;
+use App\Models\SiswaModel;
+use App\Models\KriteriaModel;
+use App\Models\BobotAlternatifModel;
+use App\Models\NilaiSiswaModel;
+use App\Models\NilaiKriteriaModel;
 
 
 /**
@@ -56,6 +62,9 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
         helper('form');
 
+
         $this->session = \Config\Services::session();
+        // $User = new UserModel();
+        // $Siswa = new SiswaModel();
     }
 }

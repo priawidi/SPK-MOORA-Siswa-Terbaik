@@ -7,11 +7,14 @@ use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 use App\Models\UserModel;
 
-class AuthGuard implements FilterInterface
+class AuthAdmin implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!session()->get('isLoggedIn')) {
+        $User = new UserModel();
+        $role = session('role');
+        // $data['role'] = $User->getUserByRole($role);
+        if (session()->role != 1) {
             return redirect()->to('/login');
         }
     }

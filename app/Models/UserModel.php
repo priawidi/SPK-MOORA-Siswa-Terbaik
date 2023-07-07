@@ -68,30 +68,10 @@ class UserModel extends Model
         return $results;
     }
 
-    public function countUser()
+    public function getUserByRole($role)
     {
-        return $this->db->count_all('user');
-    }
-
-    public function editUserData($new_data = array())
-    {
-        $username = $new_data['username'];
-        $password = $new_data['password'];
-        $role = $new_data['role'];
-        $id = $new_data['id_user'];
-
-        $query = 'UPDATE user SET username = $username, password = $password, role = $role WHERE id_user = $id';
-        return $this->db->query($query);
-    }
-
-    public function deleteUser($id)
-    {
-        $query = 'DELETE FROM user WHERE user_id = $id';
-        return $this->db->query($query);
-    }
-
-    public function updatePassword($username, $password)
-    {
-        return $this->db->query('UPDATE user SET password = $password WHERE username = $username');
+        $query = $this->db->query("SELECT * FROM user WHERE role = '$role'");
+        $results = $query->getRowArray();
+        return $results;
     }
 }

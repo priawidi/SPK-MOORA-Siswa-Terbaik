@@ -29,6 +29,7 @@ class Kriteria extends Migration
             ],
             'bobot_nilai' => [
                 'type' => 'float',
+
             ],
 
         ]);

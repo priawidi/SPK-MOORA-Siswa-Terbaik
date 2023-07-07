@@ -77,9 +77,11 @@ class KriteriaModel extends Model
       return $results;
    }
 
-   public function getKriteriaByID($kriteria_id)
+   public function getKriteriaByID($id_kriteria)
    {
-      return $this->db->query("SELECT * FROM kriteria WHERE `id_kriteria` = '$kriteria_id'")->row_array();
+      $query = $this->db->query("SELECT * FROM kriteria WHERE `id_kriteria` = '$id_kriteria'");
+      $results = $query->getRowArray();
+      return $results;
    }
 
    public function getKriteriaByNmKriteria($kriteria)

@@ -21,11 +21,13 @@ class AdminController extends BaseController
     {
         $User = new UserModel();
         $username = session('username');
+        $role = session('role');
         $data['user_data'] = $User->getUserByUsername($username);
         $data['users'] = $User->getAllUser();
+        $data['role'] = $User->getUserByRole($role);
         $data['title'] = "Manage User";
 
-        return view('admin/user/index', $data,);
+        return view('admin/user/index', $data);
     }
 
     public function add_user()
@@ -240,7 +242,7 @@ class AdminController extends BaseController
 
         $data['title'] = "Detail Siswa";
 
-        return view('admin/siswa/detail_siswa', $data,);
+        return view('admin/siswa/detail_siswa', $data);
     }
 
     public function edit_siswa($id)
@@ -351,8 +353,6 @@ class AdminController extends BaseController
         $Kriteria = new KriteriaModel();
         $username = session('username');
         $data['user_data'] = $User->getUserByUsername($username);
-
-        $validation = \Config\Services::validation();
         $rules = [
             'nama_kriteria' => [
                 'label'    => 'Nama Kriteria',
@@ -380,7 +380,7 @@ class AdminController extends BaseController
             ],
             'bobot_nilai' => [
                 'label'    => 'Bobot Nilai',
-                'rules'    => 'required|trim',
+                'rules'    => 'trim|required',
                 'errors'    => [
                     'required'    => 'Bobot Nilai harus diisi.'
                 ]
@@ -392,11 +392,101 @@ class AdminController extends BaseController
             $data['title'] = "Admin|Tambah Kriteria";
             return view('admin/nilai/tambah_kriteria', $data);
         } else {
-            $post = $this->request->getPost(['nama_kriteria', 'kode_kriteria', 'jenis_nilai', 'bobt_nilai']);
+            $post = $this->request->getPost(['nama_kriteria', 'kode_kriteria', 'jenis_nilai', 'bobot_nilai']);
 
             $Kriteria->insert($post);
 
             $this->session->setFlashdata('success_alert', 'Kriteria berhasil ditambah!');
+            return redirect()->to(base_url('kriteria'));
+        }
+    }
+    public function delete_kriteria($id)
+    {
+
+        $Kriteria = new KriteriaModel();
+        $Kriteria->delete($id);
+        session()->setFlashdata('success_alert', 'Kriteria berhasil dihapus!');
+        return redirect()->to(base_url('kriteria'));
+    }
+
+    public function detail_kriteria($id)
+    {
+        $User = new UserModel();
+        $Kriteria = new KriteriaModel();
+        $data['kriteria'] = $Kriteria->getKriteriaByID($id);
+
+        $data['title'] = "Detail Kriteria";
+
+        return view('admin/nilai/detail_kriteria', $data);
+    }
+
+    public function edit_kriteria($id)
+    {
+        $User = new UserModel();
+        $Kriteria = new KriteriaModel();
+        $username = session('username');
+        // $nama_siswa = session('nama_siswa');
+        // $data['user_data'] = $User->getUserByUsername($username);
+        // $data['user_data'] = $Siswa->getSiswaByNmSiswa($nama_siswa);
+        $data = [
+            'title' => 'Admin|Edit Kriteria',
+        ];
+
+        $rules = [
+            'nama_kriteria' => [
+                'label'    => 'Nama kriteria',
+                'rules'    => 'required|trim',
+                'errors'    => [
+                    'required'    => 'Nama kriteria harus diisi.'
+                ]
+
+            ],
+            'kode_kriteria' => [
+                'label'    => 'kode_kriteria',
+                'rules'    => 'required|trim',
+                'errors'    => [
+                    'required'    => 'kode_kriteria harus diisi.'
+                ]
+
+            ],
+            'jenis_nilai' => [
+                'label'    => 'jenis_nilai',
+                'rules'    => 'required|trim',
+                'errors'    => [
+                    'required'    => 'jenis_nilai harus diisi.'
+                ]
+
+            ],
+            'bobot_nilai' => [
+                'label'    => 'Bobot Nilai',
+                'rules'    => 'required|trim',
+                'errors'    => [
+                    'required'    => 'Bobot Nilai harus diisi.'
+                ]
+
+            ],
+
+        ];
+        if (!$this->validate($rules)) {
+            $data['title'] = "Admin|Edit Siswa";
+            $data['kriteria'] = $Kriteria->getKriteriaByID($id);
+
+
+            return view('admin/nilai/edit_kriteria', $data);
+        } else {
+
+            // $post = $this->request->getPost(['username', 'password', 'role']);
+
+            $Kriteria->update($id, [
+                'nama_kriteria' => $this->request->getVar('nama_kriteria'),
+                'kode_kriteria' => $this->request->getVar('kode_kriteria'),
+                'jenis_nilai' => $this->request->getVar('jenis_nilai'),
+                'bobot_nilai' => $this->request->getVar('bobot_nilai'),
+
+
+            ]);
+
+            session()->setFlashdata('success_alert', 'Kriteria berhasil diubah!');
             return redirect()->to(base_url('kriteria'));
         }
     }

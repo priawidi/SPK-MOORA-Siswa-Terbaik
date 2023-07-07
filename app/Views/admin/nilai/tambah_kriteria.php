@@ -20,15 +20,14 @@
                         <div class="form-group row">
                             <label for="nama_kriteria" class="col-lg-3 col-form-label">Kriteria *</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" id="nama_kriteria" name="nama_kriteria" autofocus><?php echo set_value('nama_kriteria'); ?></input>
+                                <input type="text" class="form-control" id="nama_kriteria" name="nama_kriteria" autofocus><?php echo set_value('nama_kriteria'); ?>
 
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="kode_kriteria" class="col-lg-3 col-form-label">Kode Kriteria *</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" id="kode_kriteria" name="kode_kriteria" autofocus><?php echo set_value('kode_kriteria'); ?></input>
-
+                                <input type="text" class="form-control" id="kode_kriteria" name="kode_kriteria" autofocus><?php echo set_value('kode_kriteria'); ?>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -44,7 +43,7 @@
                         <div class="form-group row">
                             <label for="bobot_nilai" class="col-lg-3 col-form-label">Bobot Nilai *</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" id="bobot_nilai" name="bobot_nilai" autofocus><?php echo set_value('bobot_nilai'); ?></input>
+                                <input type="text" class="form-control" id="bobot_nilai" name="bobot_nilai" value="<?php echo set_value('bobot_nilai'); ?>" placeholder="Masukkan Bilangan Bobot">
 
                             </div>
                         </div>
