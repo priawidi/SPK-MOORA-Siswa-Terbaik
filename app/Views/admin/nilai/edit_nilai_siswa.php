@@ -13,32 +13,35 @@
             <!-- Basic Card Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Tambah Siswa</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Tambah Nilai Siswa</h6>
                 </div>
                 <div class="card-body">
-                    <form action="<?php echo site_url('addsiswa'); ?>" method="post">
+                    <form action="<?php echo site_url('addnilaisiswa/' . $siswa['id_siswa']); ?>" method="post">
                         <?= csrf_field(); ?>
                         <div class="form-group row">
                             <label for="nama_siswa" class="col-lg-3 col-form-label">Nama *</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" autofocus><?php echo set_value('nama_siswa'); ?></input>
-
+                                <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" value="<?php echo $siswa['nama_siswa']; ?>"></input>
+                                <input type="hidden" name="id_siswa" id="id_siswa" value="<?php echo $siswa['id_siswa']; ?>">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="nis" class="col-lg-3 col-form-label">NIS *</label>
-                            <div class="col-lg-9">
-                                <input type="text" class="form-control" id="nis" name="nis" autofocus><?php echo set_value('nis'); ?></input>
 
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="kelas" class="col-lg-3 col-form-label">Kelas *</label>
-                            <div class="col-lg-9">
-                                <input type="text" class="form-control" id="kelas" name="kelas" autofocus><?php echo set_value('kelas'); ?></input>
+                        <?php $i = 1;
 
+                        foreach ($nilai_siswa as $krit) : ?>
+
+                            <div class="form-group row">
+                                <label for="nama_kriteria" class="col-lg-3 col-form-label"><?php echo $krit['nama_kriteria'] ?></label>
+                                <div class="col-lg-9">
+                                    <input type="text" min="0" max="100" class="form-control" name="nama_kriteria[<?php echo $i; ?>][nama_kriteria]" value="<?php echo $krit['nilai']; ?>">
+
+                                </div>
                             </div>
-                        </div>
+
+
+
+                        <?php endforeach; ?>
+
 
 
                         <small style="color: red;">*harus diisi</small>

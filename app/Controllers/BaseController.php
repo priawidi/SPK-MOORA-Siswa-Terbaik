@@ -49,6 +49,10 @@ abstract class BaseController extends Controller
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
     protected $session;
+    protected $Siswa;
+    protected $User;
+    protected $Nilai;
+    protected $Kriteria;
 
 
     /**
@@ -65,6 +69,9 @@ abstract class BaseController extends Controller
 
         $this->session = \Config\Services::session();
         // $User = new UserModel();
-        // $Siswa = new SiswaModel();
+        $this->Siswa = new SiswaModel();
+        $this->User = new UserModel();
+        $this->Kriteria = new KriteriaModel();
+        $this->Nilai = new NilaiSiswaModel();
     }
 }

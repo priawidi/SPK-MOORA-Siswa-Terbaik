@@ -53,7 +53,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?php echo site_url('nilaisiswa') ?>">
             <i class="fas fa-fw fa-table"></i>
             <span>Nilai Siswa</span></a>
     </li>
@@ -77,15 +77,10 @@
     <li class="nav-item">
         <a class="nav-link" href="tables.html">
             <i class="fas fa-fw fa-table"></i>
-            <span>Perbandingan Kriteria</span></a>
+            <span>Hasil Hitungan</span></a>
     </li>
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Perbandingan Alternatif</span></a>
-    </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">

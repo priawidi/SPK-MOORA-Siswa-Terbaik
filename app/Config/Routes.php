@@ -39,23 +39,30 @@ $routes->get('/admin', 'AdminController::index', ['filter' => 'authGuard']);
 $routes->get('/guru', 'GuruController::index', ['filter' => 'authGuard']);
 $routes->get('/siswa', 'SiswaController::index', ['filter' => 'authGuard']);
 //USER
-$routes->get('/user', 'AdminController::manajemen_user', ['filter' => ['authGuard', 'authAdmin']]);
-$routes->match(['get', 'post'], '/adduser', 'AdminController::add_user', ['filter' => ['authGuard', 'authAdmin']]);
-$routes->match(['get', 'post'], '/deleteuser/(:num)', 'AdminController::delete_user/$1', ['filter' => ['authGuard', 'authAdmin']]);
-$routes->match(['get', 'post'], '/edituser/(:num)', 'AdminController::edit_user/$1', ['filter' => ['authGuard', 'authAdmin']]);
-$routes->get('/detailuser/(:num)', 'AdminController::detail_user/$1', ['filter' => ['authGuard', 'authAdmin']]);
+$routes->get('/user', 'UserController::manajemen_user', ['filter' => ['authGuard', 'authAdmin']]);
+$routes->match(['get', 'post'], '/adduser', 'UserController::add_user', ['filter' => ['authGuard', 'authAdmin']]);
+$routes->match(['get', 'post'], '/deleteuser/(:num)', 'UserController::delete_user/$1', ['filter' => ['authGuard', 'authAdmin']]);
+$routes->match(['get', 'post'], '/edituser/(:num)', 'UserController::edit_user/$1', ['filter' => ['authGuard', 'authAdmin']]);
+$routes->get('/detailuser/(:num)', 'UserController::detail_user/$1', ['filter' => ['authGuard', 'authAdmin']]);
 //SISWA
-$routes->get('/datasiswa', 'AdminController::data_siswa', ['filter' => ['authGuard', 'authGuru']]);
-$routes->match(['get', 'post'], '/addsiswa', 'AdminController::add_siswa', ['filter' => ['authGuard', 'authGuru']]);
-$routes->match(['get', 'post'], '/deletesiswa/(:num)', 'AdminController::delete_siswa/$1', ['filter' => ['authGuard', 'authGuru']]);
-$routes->match(['get', 'post'], '/editsiswa/(:num)', 'AdminController::edit_siswa/$1');
-$routes->get('/detailsiswa/(:num)', 'AdminController::detail_siswa/$1', ['filter' => ['authGuard', 'authGuru']]);
-//NILAI
-$routes->get('/kriteria', 'AdminController::kriteria', ['filter' => 'authGuard']);
-$routes->match(['get', 'post'], '/addkriteria', 'AdminController::add_kriteria', ['filter' => 'authGuard']);
-$routes->match(['get', 'post'], '/deletekriteria/(:num)', 'AdminController::delete_kriteria/$1', ['filter' => 'authGuard']);
-$routes->match(['get', 'post'], '/editkriteria/(:num)', 'AdminController::edit_kriteria/$1');
-$routes->get('/detailkriteria/(:num)', 'AdminController::detail_kriteria/$1', ['filter' => 'authGuard']);
+$routes->get('/datasiswa', 'SiswaController::data_siswa', ['filter' => ['authGuard', 'authGuru']]);
+$routes->match(['get', 'post'], '/addsiswa', 'SiswaController::add_siswa', ['filter' => ['authGuard', 'authGuru']]);
+$routes->match(['get', 'post'], '/deletesiswa/(:num)', 'SiswaController::delete_siswa/$1', ['filter' => ['authGuard', 'authGuru']]);
+$routes->match(['get', 'post'], '/editsiswa/(:num)', 'SiswaController::edit_siswa/$1');
+$routes->get('/detailsiswa/(:num)', 'SiswaController::detail_siswa/$1', ['filter' => ['authGuard', 'authGuru']]);
+//KRITERIA
+$routes->get('/kriteria', 'KriteriaController::kriteria', ['filter' => 'authGuard']);
+$routes->match(['get', 'post'], '/addkriteria', 'KriteriaController::add_kriteria', ['filter' => 'authGuard']);
+$routes->match(['get', 'post'], '/deletekriteria/(:num)', 'KriteriaController::delete_kriteria/$1', ['filter' => 'authGuard']);
+$routes->match(['get', 'post'], '/editkriteria/(:num)', 'KriteriaController::edit_kriteria/$1');
+$routes->get('/detailkriteria/(:num)', 'KriteriaController::detail_kriteria/$1', ['filter' => 'authGuard']);
+//NILAI SISWA
+$routes->get('/nilaisiswa', 'SiswaController::nilai_siswa', ['filter' => 'authGuard']);
+$routes->match(['get', 'post'], '/addnilaisiswa/(:num)', 'SiswaController::add_nilai_siswa/$1', ['filter' => 'authGuard']);
+$routes->match(['get', 'post'], '/deletenilaisiswa/(:num)', 'SiswaController::delete_nilai_siswa/$1', ['filter' => 'authGuard']);
+$routes->match(['get', 'post'], '/editnilaisiswa/(:num)', 'SiswaController::edit_nilai_siswa/$1');
+$routes->get('/detailnilaisiswa/(:num)', 'SiswaController::detail_nilai_siswa/$1', ['filter' => 'authGuard']);
+
 /*
 
  * --------------------------------------------------------------------

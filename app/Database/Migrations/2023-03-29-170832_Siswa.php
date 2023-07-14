@@ -27,18 +27,7 @@ class Siswa extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 128,
             ],
-            'jenis_kelamin' => [
-                'type' => 'VARCHAR',
-                'constraint' => 128,
-            ],
-            'alamat' => [
-                'type' => 'TEXT',
-                'constraint' => 128,
-            ],
-            'no_telepon' => [
-                'type' => 'VARCHAR',
-                'constraint' => 20,
-            ],
+
 
         ]);
         $this->forge->addKey('id_siswa', true);

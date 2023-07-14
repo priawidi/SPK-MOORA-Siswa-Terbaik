@@ -38,34 +38,7 @@
                                 <?php echo $validation->getError('kelas'); ?>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="jenis_kelamin" class="col-lg-3 col-form-label">Jenis Kelamin *</label>
-                            <div class="col-lg-9">
-                                <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
-                                    <?php if ($siswa['jenis_kelamin'] == "Laki-laki") : ?>
-                                        <option value="Laki-laki" selected>Laki-laki</option>
-                                        <option value="Perempuan">Perempuan</option>
-                                    <?php else : ?>
-                                        <option value="Laki-laki">Laki-laki</option>
-                                        <option value="Perempuan" selected>Perempuan</option>
-                                    <?php endif; ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="alamat" class="col-lg-3 col-form-label">Alamat *</label>
-                            <div class="col-lg-9">
-                                <input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $siswa['alamat']; ?>" autofocus>
-                                <?php echo $validation->getError('alamat'); ?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="no_telepon" class="col-lg-3 col-form-label">No.Telepon *</label>
-                            <div class="col-lg-9">
-                                <input type="text" class="form-control" id="no_telepon" name="no_telepon" value="<?php echo $siswa['no_telepon']; ?>" autofocus>
-                                <?php echo $validation->getError('no_telepon'); ?>
-                            </div>
-                        </div>
+
 
                         <small style="color: red;">*harus diisi</small>
                         <div class="d-flex mt-4">

@@ -6,7 +6,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center mb-4">
         <h1 class="h3 mb-0 text-gray-800 mr-4">List Siswa</h1>
-        <a class="btn btn-primary" href="<?php echo site_url('addsiswa'); ?>">Tambah</a>
+        <a class="btn btn-primary" href="<?php echo site_url('addnilaisiswa'); ?>">Tambah</a>
     </div>
 
     <?php if (session()->getFlashdata('danger_alert')) : ?>
@@ -31,28 +31,40 @@
                     <thead>
                         <tr>
                             <th>Nama</th>
-                            <th>NIS</th>
                             <th>Kelas</th>
-
+                            <?php
+                            foreach ($nilai_siswa as $ns) : ?>
+                                <th><?php echo $ns['nama_kriteria'] ?></th>
+                            <?php endforeach; ?>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($siswa as $sis) : ?>
 
+                        <?php
+                        foreach ($siswa as $ns) : ?>
                             <tr>
-                                <td><?php echo $sis['nama_siswa'] ?></td>
-                                <td><?php echo $sis['nis'] ?></td>
-                                <td><?php echo $sis['kelas'] ?></td>
-                                <td>
-
-                                    <a class="badge badge-secondary" href="<?php echo site_url(); ?>detailsiswa/<?php echo $sis['id_siswa']; ?>">
-                                        Detail
-                                    </a>
-
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
+                                <td><?php echo $ns['nama_siswa'] ?></td>
+                                <td><?php echo $ns['kelas'] ?></td>
+                                <?php
+                                foreach ($nilai_siswa as $nsa) :
+                                    if ($ns['id_siswa'] == $nsa['fk_id_siswa']) :
+                                ?>
+                                        <td> <?php echo $nsa['nilai'] ?></td>
+                                <?php endif;
+                                endforeach; ?>
+                                <?php if ($ns['id_siswa'] == $nsa['fk_id_siswa']) :
+                                ?>
+                                    <td>
+                                        <a class="badge badge-secondary" href="<?php echo site_url(); ?>detailnilaisiswa/<?php echo $nsa['fk_id_siswa'] ?>">
+                                            Detail
+                                        </a>
+                                    </td>
+                                <?php
+                                endif; ?>
+                            <tr>
+                            <?php
+                        endforeach; ?>
                     </tbody>
                 </table>
             </div>

@@ -20,9 +20,7 @@
                     <h4 class="card-title">Nama : <?php echo $siswa['nama_siswa']; ?></h4>
                     <h5 class="card-title">Nis : <?php echo $siswa['nis']; ?></h5>
                     <h5 class="card-title">Kelas : <?php echo $siswa['kelas']; ?></h5>
-                    <h5 class="card-title">Jenis Kelamin : <?php echo $siswa['jenis_kelamin']; ?></h5>
-                    <h5 class="card-title">Alamat : <?php echo $siswa['alamat']; ?></h5>
-                    <h5 class="card-title">No. Telepon : <?php echo $siswa['no_telepon']; ?></h5>
+
 
 
                     <div class="d-flex mt-4">
