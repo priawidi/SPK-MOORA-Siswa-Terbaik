@@ -45,9 +45,11 @@
                                 <td><?php echo $sis['nis'] ?></td>
                                 <td><?php echo $sis['kelas'] ?></td>
                                 <td>
-
                                     <a class="badge badge-secondary" href="<?php echo site_url(); ?>detailsiswa/<?php echo $sis['id_siswa']; ?>">
                                         Detail
+                                    </a>
+                                    <a class="badge badge-secondary" href="<?php echo site_url('editnilaisiswa/' . $sis['id_siswa']); ?>">
+                                        Nilai
                                     </a>
 
                                 </td>
@@ -55,6 +57,7 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?= $pager->links('siswa', 'bootstrap_pagination'); ?>
             </div>
         </div>
     </div>

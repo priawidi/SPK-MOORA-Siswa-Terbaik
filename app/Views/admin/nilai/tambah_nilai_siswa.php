@@ -28,19 +28,20 @@
 
                         <?php $i = 1;
 
-                        foreach ($nilai_siswa as $krit) : ?>
+                        foreach ($kriteria as $krit) : ?>
 
                             <div class="form-group row">
-                                <label for="nama_kriteria" class="col-lg-3 col-form-label"><?php echo $krit['nama_kriteria'] ?></label>
+                                <label for="nilai" class="col-lg-3 col-form-label"><?php echo $krit['nama_kriteria'] ?></label>
                                 <div class="col-lg-9">
-                                    <input type="text" min="0" max="100" class="form-control" name="nama_kriteria[<?php echo $i; ?>][nama_kriteria]" value="<?php echo $krit['nilai']; ?>">
+                                    <input type="text" min="0" max="100" class="form-control" name="nilai<?php echo $i; ?>" autofocus><?php echo set_value('nilai'); ?>
+
+                                    <input type="hidden" name="fk_id_kriteria" value="<?php echo $krit['id_kriteria']; ?>">
 
                                 </div>
                             </div>
 
-
-
-                        <?php endforeach; ?>
+                        <?php $i++;
+                        endforeach; ?>
 
 
 

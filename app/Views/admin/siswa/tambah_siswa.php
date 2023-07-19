@@ -41,7 +41,7 @@
                         </div>
 
 
-                        <small style="color: red;">*harus diisi</small>
+                        <small style=" color: red;">*harus diisi</small>
                         <div class="d-flex mt-4">
                             <a href="<?php echo site_url('datasiswa'); ?>" class="btn btn-secondary ml-auto">Kembali</a>
                             <button type="submit" class="btn btn-primary ml-3">Tambah</button>

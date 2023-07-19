@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
+
 class SiswaController extends BaseController
 {
   public function data_siswa()
@@ -11,7 +12,8 @@ class SiswaController extends BaseController
 
     $username = session('username');
     $data['user_data'] = $this->User->getUserByUsername($username);
-    $data['siswa'] = $this->Siswa->getAllSiswa();
+    $data['siswa'] = $this->Siswa->paginate(10, 'siswa');
+    $data['pager'] = $this->Siswa->pager;
     $data['title'] = "Manage Siswa";
 
     return view('admin/siswa/index', $data,);
@@ -20,13 +22,9 @@ class SiswaController extends BaseController
   public function add_siswa()
   {
 
-
     $username = session('username');
-    // $nama_siswa = session('nama_siswa');
     $data['user_data'] = $this->User->getUserByUsername($username);
-    // $data['user_data'] = $Siswa->getSiswaByNmSiswa($nama_siswa);
 
-    $validation = \Config\Services::validation();
     $rules = [
       'nama_siswa' => [
         'label'    => 'Nama Siswa',
@@ -52,18 +50,15 @@ class SiswaController extends BaseController
         ]
 
       ],
-
-
     ];
     if (!$this->validate($rules)) {
       $data['title'] = "Admin|Tambah Siswa";
       return view('admin/siswa/tambah_siswa', $data);
     } else {
       $post = $this->request->getPost(['nama_siswa', 'nis', 'kelas']);
-
       $this->Siswa->insert($post);
 
-      $this->session->setFlashdata('success_alert', 'User berhasil ditambah!');
+      $this->session->setFlashdata('success_alert', 'Siswa berhasil ditambah!');
       return redirect()->to(base_url('datasiswa'));
     }
   }
@@ -71,9 +66,8 @@ class SiswaController extends BaseController
   public function delete_siswa($id)
   {
 
-    $Siswa = new SiswaModel();
-    $Siswa->delete($id);
-    session()->setFlashdata('success_alert', 'User berhasil dihapus!');
+    $this->Siswa->delete($id);
+    session()->setFlashdata('success_alert', 'Siswa berhasil dihapus!');
     return redirect()->to(base_url('datasiswa'));
   }
 
@@ -123,29 +117,15 @@ class SiswaController extends BaseController
         ]
 
       ],
-      'jenis_kelamin' => [
-        'label'    => 'Jenis Kelamin',
+      'nilai' => [
+        'label'    => 'Nilai Siswa',
         'rules'    => 'required|trim',
         'errors'    => [
-          'required'    => 'Jenis Kelamin harus diisi.'
+          'required'    => 'Nilai Siswa harus diisi.'
         ]
 
       ],
-      'alamat' => [
-        'label'    => 'Alamat',
-        'rules'    => 'required|trim',
-        'errors'    => [
-          'required'    => 'Alamat harus diisi.'
-        ]
 
-      ],
-      'no_telepon' => [
-        'label'    => 'No. Telepon',
-        'rules'    => 'required|trim',
-        'errors'    => [
-          'required'    => 'No. Telepon harus diisi.'
-        ]
-      ],
 
     ];
     if (!$this->validate($rules)) {
@@ -162,10 +142,6 @@ class SiswaController extends BaseController
         'nama_siswa' => $this->request->getVar('nama_siswa'),
         'nis' => $this->request->getVar('nis'),
         'kelas' => $this->request->getVar('kelas'),
-        'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
-        'alamat' => $this->request->getVar('alamat'),
-        'no_telepon' => $this->request->getVar('no_telepon')
-
       ]);
 
       session()->setFlashdata('success_alert', 'Siswa berhasil diubah!');
@@ -194,12 +170,12 @@ class SiswaController extends BaseController
     $username = session('username');
     $data['user_data'] = $this->User->getUserByUsername($username);
     $rules = [
-      'nilai' => [
+      'nama_siswa' => [
         'label'    => 'Nilai Siswa',
         'rules'    => 'required|trim',
         'errors'    => [
           'required'    => 'Nilai Siswa harus diisi.'
-        ]
+        ],
 
       ],
 
@@ -211,19 +187,34 @@ class SiswaController extends BaseController
       $data['kriteria'] = $this->Kriteria->getAllKriteria();
       return view('admin/nilai/tambah_nilai_siswa', $data);
     } else {
-      $post = $this->request->getPost(['nilai']);
+      $kriteria = $this->Kriteria->getAllKriteria();
+      $count = count($kriteria);
+      for ($i = 1; $i <= $count; $i++) {
 
-      foreach ($post as $x) {
         $data = [
-          'id_kriteria' => $x['id_kriteria'],
-          'nilai' => $x['nilai']
+          'fk_id_kriteria' => $i,
+          'fk_id_siswa' => $this->request->getPost('id_siswa'),
+          'nilai' => $this->request->getPost('nilai' . $i),
         ];
-        $this->Nilai->insert($post);
+        $this->Nilai->insert($data);
       }
+      // $post = $this->request->getPost('nilai');
+      // $id_siswa = $this->request->getPost('id_siswa');
+      // $i = 1;
+      // foreach ($post as $x) {
+      //   $data = [
+      //     'fk_id_kriteria' => $i,
+      //     'fk_id_siswa' => $id_siswa,
+      //     'nilai' => $x['nilai'],
+      //   ];
+      //   $this->Nilai->insert($data);
+      //   $i++;
+      //   $this->session->setFlashdata('success_alert', 'Nilai Siswa gagal ditambah!');
+      // }
 
 
       $this->session->setFlashdata('success_alert', 'Nilai Siswa berhasil ditambah!');
-      return redirect()->to(base_url('nilai_siswa'));
+      return redirect()->to('datasiswa');
     }
   }
   public function delete_nilai_siswa($id)
@@ -257,7 +248,7 @@ class SiswaController extends BaseController
     $username = session('username');
     $data['user_data'] = $this->User->getUserByUsername($username);
     $rules = [
-      'nilai' => [
+      'nama_siswa' => [
         'label'    => 'Nilai Siswa',
         'rules'    => 'required|trim',
         'errors'    => [
@@ -272,21 +263,29 @@ class SiswaController extends BaseController
       $data['siswa'] = $this->Siswa->getSiswaByID($id);
       $data['nilai_siswa'] = $this->Nilai->getNilaiSiswaByIdSiswa($id);
       $data['kriteria'] = $this->Kriteria->getAllKriteria();
-      return view('admin/nilai/edit_nilai_siswa', $data);
+      if (isset($data['nilai_siswa']) && !empty($data['nilai_siswa'])) {
+        return view('admin/nilai/edit_nilai_siswa', $data);
+      } else {
+        $idsis = $this->Siswa->getSiswaByID($id);
+        return redirect()->to('addnilaisiswa/' . $idsis['id_siswa']);
+      }
     } else {
-      $post = $this->request->getPost(['nilai']);
+      $kriteria = $this->Kriteria->getAllKriteria();
+      $count = count($kriteria);
+      for ($i = 1; $i <= $count; $i++) {
 
-      foreach ($post as $x) {
         $data = [
-          'id_kriteria' => $x['id_kriteria'],
-          'nilai' => $x['nilai']
+          'fk_id_kriteria' => $i,
+          'fk_id_siswa' => $this->request->getVar('id_siswa'),
+          'nilai' => $this->request->getVar('nilai' . $i),
         ];
-        $this->Nilai->insert($post);
+
+        $this->Nilai->editNilaiSiswaData($data);
       }
 
 
-      $this->session->setFlashdata('success_alert', 'Nilai Siswa berhasil ditambah!');
-      return redirect()->to(base_url('nilai_siswa'));
+      $this->session->setFlashdata('success_alert', 'Nilai Siswa berhasil diubah!');
+      return redirect()->to(base_url('nilaisiswa'));
     }
   }
 }

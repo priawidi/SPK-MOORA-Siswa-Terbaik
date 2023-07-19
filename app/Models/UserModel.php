@@ -41,15 +41,9 @@ class UserModel extends Model
     protected $afterDelete    = [];
 
 
-    // public function insert($data = array())
-    // {
-    //     return $this->db->insert('user', $data);
-    // }
-
     public function getAllUser()
     {
         $query = $this->db->query("SELECT * FROM user ");
-        // return $this->db->query('SELECT * FROM user ')->result_array();
         $results = $query->getResultArray();
         return $results;
     }

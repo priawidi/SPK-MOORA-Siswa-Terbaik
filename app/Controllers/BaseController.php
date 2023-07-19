@@ -11,9 +11,10 @@ use Psr\Log\LoggerInterface;
 use App\Models\UserModel;
 use App\Models\SiswaModel;
 use App\Models\KriteriaModel;
-use App\Models\BobotAlternatifModel;
 use App\Models\NilaiSiswaModel;
-use App\Models\NilaiKriteriaModel;
+use App\Models\MetodeModel;
+use App\Models\ImportModel;
+
 
 
 /**
@@ -53,6 +54,8 @@ abstract class BaseController extends Controller
     protected $User;
     protected $Nilai;
     protected $Kriteria;
+    protected $Metode;
+    protected $Import;
 
 
     /**
@@ -65,6 +68,7 @@ abstract class BaseController extends Controller
 
         // Preload any models, libraries, etc, here.
         helper('form');
+        helper('array');
 
 
         $this->session = \Config\Services::session();
@@ -73,5 +77,7 @@ abstract class BaseController extends Controller
         $this->User = new UserModel();
         $this->Kriteria = new KriteriaModel();
         $this->Nilai = new NilaiSiswaModel();
+        $this->Metode = new MetodeModel();
+        $this->Import = new ImportModel();
     }
 }

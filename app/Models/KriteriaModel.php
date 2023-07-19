@@ -41,28 +41,12 @@ class KriteriaModel extends Model
    protected $beforeDelete   = [];
    protected $afterDelete    = [];
 
-   // public function insert($data = array())
-   // {
-   //    return $this->db->insert('kriteria', $data);
-   // }
-
-   public function insert_nilai($data = array())
+   public function getKriteria()
    {
-      $insert = array();
-      foreach ($data as $d) {
-         $i = (float) $d;
-         array_push($insert, $i);
-      }
-
-      foreach ($insert as $nilai) {
-         $this->db->query("INSERT INTO nilai_kriteria (nilai) VALUES ('$nilai')");
-      }
+      $query = $this->db->query("SELECT * FROM kriteria");
+      return $query->getResultArray();
    }
 
-   public function truncate_nilai()
-   {
-      return $this->db->query("TRUNCATE TABLE nilai_kriteria");
-   }
 
    public function getAllNilaiKriteria()
    {
@@ -86,12 +70,13 @@ class KriteriaModel extends Model
 
    public function getKriteriaByNmKriteria($kriteria)
    {
-      return $this->db->query("SELECT * FROM kriteria WHERE `nama_kriteria` = '$kriteria'")->row_array();
-   }
-
-   public function countKriteria()
-   {
-      return $this->db->count_all('kriteria');
+      $query = $this->db->query(
+         "SELECT * 
+         FROM kriteria 
+         WHERE nama_kriteria = $kriteria"
+      );
+      $results = $query->getRowArray();
+      return $results;
    }
 
    public function editKriteriaData($new_data = array())
@@ -103,16 +88,5 @@ class KriteriaModel extends Model
 
       $query = "UPDATE kriteria SET `nama_kriteria` = '$nama_kriteria', `kode_kriteria` = '$kode_kriteria', `jenis_nilai` = '$jenis_nilai' WHERE `id_kriteria` = '$id_kriteria'";
       return $this->db->query($query);
-   }
-
-   public function deleteKriteria($id)
-   {
-      $query = "DELETE FROM kriteria WHERE `id_kriteria` = '$id'";
-      return $this->db->query($query);
-   }
-
-   public function updatePassword($username, $password)
-   {
-      return $this->db->query("UPDATE user SET `password` = '$password' WHERE `username` = '$username'");
    }
 }

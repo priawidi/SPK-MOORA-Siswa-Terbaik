@@ -46,6 +46,11 @@ class NilaiSiswaModel extends Model
    //    return $this->db->insert('nilai_siswa', $data);
    // }
 
+   public function getNilaiSiswa()
+   {
+      $query = $this->db->query("SELECT * FROM nilai_siswa");
+      return $query->getResultArray();
+   }
    public function getAllNilaiSiswa()
    {
       $query = $this->db->query("SELECT * 
@@ -97,42 +102,47 @@ class NilaiSiswaModel extends Model
 
    public function getNilaiSiswaByNmSiswa($nama_siswa)
    {
-      return $this->db->query("SELECT * FROM siswa WHERE `nama_siswa` = '$nama_siswa'")->row_array();
+      $query = $this->db->query("SELECT * FROM siswa WHERE `nama_siswa` = '$nama_siswa'");
+      return $query->getRowArray();
    }
 
    public function getNilaiSiswaByIDKriteria($id_kriteria)
    {
-      return $this->db->query(
+      $query = $this->db->query(
          "SELECT nilai_siswa.id, nilai_siswa.id_siswa, nilai_siswa.id_kriteria, nilai_siswa.nilai, kriteria.jenis_nilai  
          FROM nilai_siswa 
          INNER JOIN kriteria ON nilai_siswa.id_kriteria=kriteria.id_kriteria 
          WHERE nilai_siswa.id_kriteria = '$id_kriteria'"
-      )->result_array();
+      );
+      return $query->getResultArray();
    }
 
-   public function countNilaiSiswa()
-   {
-      return $this->db->count_all('nilai_siswa');
-   }
 
    public function editNilaiSiswaData($new_data = array())
    {
       $nilai = $new_data['nilai'];
-      $id_kriteria = $new_data['id_kriteria'];
-      $id_siswa = $new_data['id_siswa'];
+      $id_kriteria = $new_data['fk_id_kriteria'];
+      $id_siswa = $new_data['fk_id_siswa'];
 
-      $query = "UPDATE nilai_siswa SET `nilai` = '$nilai' WHERE `id_siswa` = '$id_siswa' AND `id_kriteria` = '$id_kriteria'";
+      $query = "UPDATE nilai_siswa SET `nilai` = '$nilai' WHERE `fk_id_siswa` = '$id_siswa' AND `fk_id_kriteria` = '$id_kriteria'";
       return $this->db->query($query);
    }
-
-   public function deleteNilaiSiswa($id_siswa)
+   public function insertNilaiSiswaData($new_data = array())
    {
-      $query = "DELETE FROM nilai_siswa WHERE `id_siswa` = '$id_siswa'";
-      return $this->db->query($query);
+      $nilai = $new_data['nilai'];
+      $id_kriteria = $new_data['fk_id_kriteria'];
+      $id_siswa = $new_data['fk_id_siswa'];
+
+      $query = $this->db->query("INSERT  INTO nilai_siswa 
+      SET `nilai` = '$nilai' , `fk_id_siswa` = '$id_siswa' ,`fk_id_kriteria` = '$id_kriteria'");
+      return $query;
    }
 
-   public function updatePassword($username, $password)
+
+   public function banned()
    {
-      return $this->db->query("UPDATE user SET `password` = '$password' WHERE `username` = '$username'");
+      $this->builder()->where('ban', 1);
+
+      return $this; // This will allow the call chain to be used.
    }
 }

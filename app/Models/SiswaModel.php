@@ -40,21 +40,6 @@ class SiswaModel extends Model
    protected $beforeDelete   = [];
    protected $afterDelete    = [];
 
-   public function getSiswa($id = false)
-   {
-      if ($id === false) {
-         return $this->table('siswa')
-            ->get()
-            ->getResultArray();
-      } else {
-         return $this->table('siswa')
-            ->where('id', $id)
-            ->get()
-            ->getRowArray();
-      }
-   }
-
-
    public function getAllSiswa()
    {
       $query = $this->db->query("SELECT * FROM siswa ");
@@ -71,21 +56,17 @@ class SiswaModel extends Model
 
    public function getSiswaByNmSiswa($nama_siswa)
    {
-      return $this->db->query("SELECT * FROM siswa WHERE `nama_siswa` = '$nama_siswa'")->row_array();
+      $query = $this->db->query("SELECT * 
+         FROM siswa 
+         JOIN nilai_siswa ON  nilai_siswa.fk_id_siswa = siswa.id_siswa
+         JOIN kriteria ON  kriteria.id_kriteria = nilai_siswa.fk_id_kriteria
+         WHERE siswa.nama_siswa = $nama_siswa");
+      $results = $query->getRowArray();
+      return $results;
    }
 
    public function getAllSiswaByStatus($status)
    {
       return $this->db->query("SELECT * FROM siswa WHERE `status_nilai` = '$status'")->result_array();
-   }
-
-   public function countSiswa()
-   {
-      return $this->db->count_all('siswa');
-   }
-
-   public function changeStatus($id_siswa, $status)
-   {
-      return $this->db->query("UPDATE siswa SET `status_nilai` = '$status' WHERE `id_siswa` = '$id_siswa'");
    }
 }

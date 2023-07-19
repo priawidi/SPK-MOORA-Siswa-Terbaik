@@ -75,7 +75,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?php echo site_url('hasilhitung') ?>">
             <i class="fas fa-fw fa-table"></i>
             <span>Hasil Hitungan</span></a>
     </li>
@@ -87,9 +87,9 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?php echo site_url('importxls') ?>">
             <i class="fas fa-fw fa-table"></i>
-            <span>Hasil</span></a>
+            <span>Import Data</span></a>
     </li>
 
 
