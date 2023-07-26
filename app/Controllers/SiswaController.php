@@ -7,7 +7,16 @@ use App\Controllers\BaseController;
 
 class SiswaController extends BaseController
 {
-  public function data_siswa()
+  public function index()
+  {
+
+    $username = session('username');
+    $data['user_data'] = $this->User->getUserByUsername($username);
+    $data['title'] = "Dashboard Siswa";
+
+    return view('siswa/index', $data,);
+  }
+  public function data_siswa($kelas)
   {
 
     $username = session('username');
@@ -15,15 +24,25 @@ class SiswaController extends BaseController
     $data['siswa'] = $this->Siswa->paginate(10, 'siswa');
     $data['pager'] = $this->Siswa->pager;
     $data['title'] = "Manage Siswa";
+    $data['grade'] = $this->Siswa->getSiswaBykelas($kelas);
+    if ($kelas == 7) {
+      return view('admin/siswa/kelas 7/index', $data,);
+    } elseif ($kelas == 8) {
+      return view('admin/siswa/kelas 8/index', $data,);
+    } elseif ($kelas == 9) {
+      return view('admin/siswa/kelas 9/index', $data,);
+    }
+
 
     return view('admin/siswa/index', $data,);
   }
 
-  public function add_siswa()
+  public function add_siswa($kelas)
   {
 
     $username = session('username');
     $data['user_data'] = $this->User->getUserByUsername($username);
+    $data['grade'] = $this->Siswa->getSiswaBykelas;
 
     $rules = [
       'nama_siswa' => [
@@ -53,13 +72,14 @@ class SiswaController extends BaseController
     ];
     if (!$this->validate($rules)) {
       $data['title'] = "Admin|Tambah Siswa";
-      return view('admin/siswa/tambah_siswa', $data);
+      $firstChar = substr($kelas, 0, 1);
+      return view('admin/siswa/kelas ' . $firstChar . '/importxls', $data);
     } else {
       $post = $this->request->getPost(['nama_siswa', 'nis', 'kelas']);
       $this->Siswa->insert($post);
 
       $this->session->setFlashdata('success_alert', 'Siswa berhasil ditambah!');
-      return redirect()->to(base_url('datasiswa'));
+      return redirect()->to(base_url('datasiswa/' . $kelas));
     }
   }
 

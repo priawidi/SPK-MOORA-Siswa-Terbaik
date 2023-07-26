@@ -29,13 +29,6 @@ if (!empty($_GET['status'])) {
     <meta charset="utf-8">
     <title>Import Excel File Data with PHP</title>
 
-    <!-- Bootstrap library -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-    <!-- Stylesheet file -->
-    <link rel="stylesheet" href="assets/css/style.css">
-
-
     <!-- Show/hide Excel file upload form -->
     <script>
         function formToggle(ID) {
@@ -69,6 +62,7 @@ if (!empty($_GET['status'])) {
         <div class="col-md-12" id="importFrm1" style="display: none;">
             <form class="row g-3" action="/savexls/<?php echo 7 ?>" method="post" enctype="multipart/form-data">
                 <div class="col-auto">
+
                     <label for="fileInput" class="visually-hidden">File Excel Kelas 7</label>
                     <input type="file" class="form-control" name="fileexcel" id="file1" required accept=".xls, .xlsx" />
                 </div>

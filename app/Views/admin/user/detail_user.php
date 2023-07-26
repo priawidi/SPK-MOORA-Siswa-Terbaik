@@ -16,7 +16,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Detail User</h6>
                 </div>
                 <div class="card-body">
-                    <img class="card-img-top" src="img.png" alt="Card image">
+                    <img class="rounded mx-auto d-block" src="..." alt="Card image">
                     <h4 class="card-title">Username : <?php echo $user['username']; ?></h4>
                     <h5 class="card-title">Password : <?php echo $user['password']; ?></h5>
                     <h5 class="card-title">Role : <?php echo $user['role']; ?></h5>

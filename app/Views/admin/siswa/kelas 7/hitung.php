@@ -3,13 +3,15 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Keterangan Kriteria</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Keterangan Kriteria KELAS 8</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped table-sm display" id="table1" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Nama Kriteria</th>
@@ -25,8 +27,8 @@
                                 <td><?php echo $krit->nama_kriteria ?></td>
                                 <td>C<?php echo $krit->id_kriteria ?></td>
                                 <td><?php echo $krit->bobot_nilai ?></td>
-                            <tr>
-                            <?php
+                            </tr>
+                        <?php
                         endforeach; ?>
                     </tbody>
                 </table>
@@ -34,14 +36,14 @@
         </div>
     </div>
 
-    <!-- DataTales Example -->
+    <!-- DataTables Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Menentukan Nilai Alternatif</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped table-sm display" id="table1" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Nama Alternatif</th>
@@ -63,8 +65,8 @@
                                 <?php endif;
                                 endforeach; ?>
 
-                            <tr>
-                            <?php
+                            </tr>
+                        <?php
                         endforeach; ?>
 
                     </tbody>
@@ -80,7 +82,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped table-sm display" id="table2" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTable3" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -111,14 +113,16 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped table-sm display" id="table2" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTable4" width="100%" cellspacing="0">
                     <thead>
 
                         <tr>
                             <th>No</th>
                             <th>Kode Kriteria</th>
-                            <?php foreach ($alternatif as $val) : ?>
-                                <th><?php echo $val->nama_siswa ?></th>
+                            <?php foreach ($siswa as $val) :
+                                // dd($val) 
+                            ?>
+                                <th><?php echo $val['nama_siswa'] ?></th>
                             <?php endforeach ?>
 
                         </tr>
@@ -148,7 +152,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped table-sm display" id="table2" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTable5" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -190,7 +194,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped table-sm display" id="table3" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTable6" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -203,6 +207,7 @@
                     <tbody>
                         <?php $no = 1; ?>
                         <?php foreach ($tabel_yi as $key => $value) :
+
                             $db = \Config\Database::connect();
                             $sis = $db->table('siswa')->getWhere(['id_siswa' => $key])->getResult(); ?>
 
@@ -227,7 +232,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped table-sm display" id="table4" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTable7" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -246,7 +251,7 @@
 
                             <tr>
                                 <td><?php echo $no++; ?></td>
-                                <td><?php echo $nilai_siswa[$key]['nama_siswa'] ?></td>
+                                <td><?php echo $siswa[$key]['nama_siswa'] ?></td>
                                 <td><?php echo $value['value']; ?></td>
                                 <td><?php echo $value['rank']; ?></td>
                             </tr>

@@ -8,7 +8,7 @@
         <h1 class="h3 mb-0 text-gray-800 mr-4">Nilai Siswa</h1>
         <a class="btn btn-primary" href="<?php echo site_url('addsiswa'); ?>">Tambah</a>
     </div>
-    <!-- DataTales Example -->
+    <!-- DataTables Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
@@ -25,7 +25,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         <?php
                         foreach ($siswa as $ns) : ?>
                             <tr>
@@ -37,9 +36,8 @@
                                         <td> <?php echo $nsa['nilai'] ?></td>
                                 <?php endif;
                                 endforeach; ?>
-
-                            <tr>
-                            <?php
+                            </tr>
+                        <?php
                         endforeach; ?>
                     </tbody>
                 </table>

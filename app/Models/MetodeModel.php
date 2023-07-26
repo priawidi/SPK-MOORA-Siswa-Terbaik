@@ -57,9 +57,29 @@ class MetodeModel extends Model
     public function getNilaiSetiapAlternatif()
     {
         $query = $this->db->query(
-            "SELECT DISTINCT siswa.nama_siswa, siswa.id_siswa 
+            "SELECT DISTINCT siswa.nama_siswa, siswa.id_siswa, nilai_siswa.nilai 
             FROM siswa
             JOIN nilai_siswa ON siswa.id_siswa = nilai_siswa.fk_id_siswa"
+        );
+        return $query->getResult();
+    }
+    public function getNilaiSetiapAlternatifByKelas($id_kelas)
+    {
+        $query = $this->db->query(
+            "SELECT *
+            FROM siswa
+            JOIN nilai_siswa ON siswa.id_siswa = nilai_siswa.fk_id_siswa
+            WHERE siswa.kelas = $id_kelas"
+        );
+        return $query->getResult();
+    }
+
+    public function getIdKriteria()
+    {
+        $query = $this->db->query(
+            "SELECT kriteria.id_kriteria
+            FROM kriteria
+            "
         );
         return $query->getResult();
     }
@@ -75,12 +95,13 @@ class MetodeModel extends Model
         return $query->getRowArray();
     }
 
-    public function pembobotanNilai($id_kriteria)
+    public function pembobotanNilai($nilai_pembagian, $id_kriteria)
     {
         $query = $this->db->query(
-            "SELECT ((nilai / nilai_pembagian) * kriteria.bobot)
-            AS pembobotan_setiap_nilai, kriteria.bobot, kriteria.jenis_nilai
-            JOIN kriteria ON kriteria.id_kriteria = nilai_siswa.fk_id_siswa
+            "SELECT ((nilai / $nilai_pembagian) * kriteria.bobot_nilai )
+            AS pembobotan_setiap_nilai, kriteria.bobot_nilai, kriteria.jenis_nilai, nilai_siswa.fk_id_siswa, nilai_siswa.fk_id_kriteria
+            FROM nilai_siswa
+            JOIN kriteria ON kriteria.id_kriteria = nilai_siswa.fk_id_kriteria
             WHERE kriteria.id_kriteria = $id_kriteria
             GROUP BY nilai_siswa.fk_id_siswa"
         );

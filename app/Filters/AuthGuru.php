@@ -12,7 +12,7 @@ class AuthGuru implements FilterInterface
     {
         if (session()->role != 1 && session()->role != 2) {
 
-            return redirect()->to('/login');
+            return redirect()->to('/block');
         }
     }
 

@@ -41,14 +41,16 @@ class NilaiSiswaModel extends Model
    protected $afterDelete    = [];
 
 
-   // public function insert($data = array())
-   // {
-   //    return $this->db->insert('nilai_siswa', $data);
-   // }
-
+   public function getNilaiSiswaByKelas($id_kelas)
+   {
+      $query = $this->db->query("SELECT * FROM nilai_siswa
+      WHERE id_kelas = $id_kelas");
+      return $query->getResultArray();
+   }
    public function getNilaiSiswa()
    {
-      $query = $this->db->query("SELECT * FROM nilai_siswa");
+      $query = $this->db->query("SELECT * FROM nilai_siswa
+      ");
       return $query->getResultArray();
    }
    public function getAllNilaiSiswa()
@@ -57,6 +59,16 @@ class NilaiSiswaModel extends Model
       FROM siswa 
       JOIN nilai_siswa ON  siswa.id_siswa = nilai_siswa.fk_id_siswa 
       JOIN kriteria ON  kriteria.id_kriteria = nilai_siswa.fk_id_kriteria");
+      $results = $query->getResultArray();
+      return $results;
+   }
+   public function getAllNilaiSiswaBykelas($id_kelas)
+   {
+      $query = $this->db->query("SELECT * 
+      FROM siswa 
+      JOIN nilai_siswa ON  siswa.id_siswa = nilai_siswa.fk_id_siswa 
+      JOIN kriteria ON  kriteria.id_kriteria = nilai_siswa.fk_id_kriteria
+      WHERE id_kelas = $id_kelas");
       $results = $query->getResultArray();
       return $results;
    }
@@ -132,9 +144,10 @@ class NilaiSiswaModel extends Model
       $nilai = $new_data['nilai'];
       $id_kriteria = $new_data['fk_id_kriteria'];
       $id_siswa = $new_data['fk_id_siswa'];
-
+      $id_kelas = $new_data['id_kelas'];
+      // dd($id_kelas);
       $query = $this->db->query("INSERT  INTO nilai_siswa 
-      SET `nilai` = '$nilai' , `fk_id_siswa` = '$id_siswa' ,`fk_id_kriteria` = '$id_kriteria'");
+      SET `nilai` = '$nilai' , `fk_id_siswa` = '$id_siswa' ,`fk_id_kriteria` = '$id_kriteria', `id_kelas` = '$id_kelas'");
       return $query;
    }
 

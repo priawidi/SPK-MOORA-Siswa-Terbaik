@@ -13,7 +13,7 @@ class AuthAdmin implements FilterInterface
     {
 
         if (session()->role != 1) {
-            return redirect()->to('/login');
+            return redirect()->to('/block');
         }
     }
 

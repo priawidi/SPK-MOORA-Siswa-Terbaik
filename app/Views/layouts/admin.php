@@ -13,6 +13,11 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
+    <!-- Custom styles datables -->
+    <link href="<?php echo base_url(); ?>assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Bootstrap library -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
 
     <?= $this->renderSection('styles') ?>
 </head>
@@ -65,7 +70,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="logout">Logout</a>
+                    <a class="btn btn-primary" href="<?php echo site_url('logout') ?>">Logout</a>
                 </div>
             </div>
         </div>
@@ -79,6 +84,14 @@
     <script src="<?= base_url('assets/vendor/jquery-easing/jquery.easing.min.js') ?>"></script>
     <!-- Custom scripts for all pages-->
     <script src="<?= base_url('assets/js/sb-admin-2.min.js') ?>"></script>
+
+    <!-- DataTables plugins -->
+    <script src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="<?php echo base_url(); ?>assets/js/custom-script.js"></script>
+
 
     <?= $this->renderSection('scripts') ?>
 </body>

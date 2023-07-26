@@ -119,6 +119,6 @@ class AuthController extends BaseController
 
     public function accessBlocked()
     {
-        return view('auth/blocked');
+        return view('block');
     }
 }

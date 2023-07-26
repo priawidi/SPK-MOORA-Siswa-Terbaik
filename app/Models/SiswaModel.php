@@ -46,6 +46,14 @@ class SiswaModel extends Model
       $results = $query->getResultArray();
       return $results;
    }
+   public function getAllSiswaByKelas($id_kelas)
+   {
+      $query = $this->db->query("SELECT * 
+      FROM siswa 
+      WHERE siswa.kelas = $id_kelas");
+      $results = $query->getResultArray();
+      return $results;
+   }
 
    public function getSiswaByID($id_siswa)
    {
@@ -64,9 +72,12 @@ class SiswaModel extends Model
       $results = $query->getRowArray();
       return $results;
    }
-
-   public function getAllSiswaByStatus($status)
+   public function getSiswaBykelas($kelas)
    {
-      return $this->db->query("SELECT * FROM siswa WHERE `status_nilai` = '$status'")->result_array();
+      $query = $this->db->query("SELECT * 
+         FROM siswa 
+         WHERE siswa.kelas = $kelas");
+      $results = $query->getResultArray();
+      return $results;
    }
 }

@@ -30,39 +30,42 @@ class DataController extends BaseController
             unset($worksheet[$i]);
         }
         // dd($worksheet);
+        // ambil id angkatan dari user yang lagi login
         foreach ($worksheet as $col) {
             $Nis = $col[1];
             $NamaSiswa = $col[2];
+
             $Pengetahuan = $col[43];
             $Keterampilan = $col[44];
             $Absen = $col[45] + $col[46] + $col[47];
             // dd($Absen);
             $Ekskul1 = $col[49];
+
             $Ekskul2 = $col[51];
             if ($Ekskul1 == 'SB') {
+                $Ekskul1 = 4;
+            } elseif ($Ekskul1 == 'B') {
                 $Ekskul1 = 3;
-            }
-            if ($Ekskul1 == 'B') {
-                $Ekskul1 = 2;
             }
             if ($Ekskul2 == '-') {
                 $Ekskul2 = 0;
-            }
-            if ($Ekskul2 == 'SB') {
+            } elseif ($Ekskul2 == 'SB') {
+                $Ekskul2 = 4;
+            } elseif ($Ekskul2 == 'B') {
                 $Ekskul2 = 3;
             }
-            if ($Ekskul2 == 'B') {
-                $Ekskul2 = 2;
-            }
-            $Ekskul = $Ekskul1 + $Ekskul2;
+
+            settype($Ekskul1, "integer");
+            settype($Ekskul2, "integer");
+            $Ekskul =  $Ekskul1 + $Ekskul2;
             // dd($Ekskul);
 
             $Sikap = $col[58];
             if ($Sikap == 'SB') {
-                $Sikap = 3;
+                $Sikap = 4;
             }
             if ($Sikap == 'B') {
-                $Sikap = 2;
+                $Sikap = 3;
             }
             // dd($Sikap);
             $DataNilai = array($Pengetahuan, $Keterampilan, $Absen, $Ekskul, $Sikap);
@@ -96,12 +99,13 @@ class DataController extends BaseController
                         'fk_id_kriteria' => $i,
                         'fk_id_siswa' => $idSis,
                         'nilai' => $DataNilai[$x],
+                        'id_kelas' => $kelas,
                     ];
                     $this->Nilai->insertNilaiSiswaData($simpannilai);
                 }
             }
         }
         session()->setFlashdata('success_alert', 'Berhasil import excel');
-        return redirect()->to('/datasiswa');
+        return redirect()->to('/datasiswa' . '/' . $kelas);
     }
 }

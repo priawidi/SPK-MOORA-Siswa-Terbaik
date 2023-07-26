@@ -29,6 +29,10 @@ class NilaiSiswa extends Migration
                 'type' => 'INT',
                 'constraint' => 11,
             ],
+            'id_kelas' => [
+                'type' => 'VARCHAR',
+                'constraint' => 11,
+            ],
 
         ]);
         $this->forge->addKey('id_nilai', true);
