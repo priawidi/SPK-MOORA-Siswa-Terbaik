@@ -12,18 +12,21 @@ class KriteriaController extends BaseController
 
 
         $username = session('username');
+        $role = session('role');
+        $data['role'] = $role;
         $data['user_data'] = $this->User->getUserByUsername($username);
         $data['kriteria'] = $this->Kriteria->getAllKriteria();
         $data['title'] = "Manage Kriteria";
-
-        return view('admin/nilai/kriteria', $data,);
+        if ($role == 1) {
+            return view('admin/nilai/kriteria', $data,);
+        }
+        if ($role == 2) {
+            return view('guru/nilai/kriteria', $data,);
+        }
     }
 
     public function add_kriteria()
     {
-
-
-
         $username = session('username');
         $data['user_data'] = $this->User->getUserByUsername($username);
         $rules = [
@@ -63,7 +66,14 @@ class KriteriaController extends BaseController
         ];
         if (!$this->validate($rules)) {
             $data['title'] = "Admin|Tambah Kriteria";
-            return view('admin/nilai/tambah_kriteria', $data);
+            $role = session('role');
+            $data['role'] = $role;
+            if ($role == 1) {
+                return view('admin/nilai/tambah_kriteria', $data);
+            }
+            if ($role == 2) {
+                return view('guru/nilai/tambah_kriteria', $data);
+            }
         } else {
             $post = $this->request->getPost(['nama_kriteria', 'kode_kriteria', 'jenis_nilai', 'bobot_nilai']);
 
@@ -75,8 +85,6 @@ class KriteriaController extends BaseController
     }
     public function delete_kriteria($id)
     {
-
-
         $this->Kriteria->delete($id);
         session()->setFlashdata('success_alert', 'Kriteria berhasil dihapus!');
         return redirect()->to(base_url('kriteria'));
@@ -84,23 +92,22 @@ class KriteriaController extends BaseController
 
     public function detail_kriteria($id)
     {
-
-
+        $role = session('role');
+        $data['role'] = $role;
         $data['kriteria'] = $this->Kriteria->getKriteriaByID($id);
-
         $data['title'] = "Detail Kriteria";
-
-        return view('admin/nilai/detail_kriteria', $data);
+        if ($role == 1) {
+            return view('admin/nilai/detail_kriteria', $data);
+        }
+        if ($role == 2) {
+            return view('guru/nilai/detail_kriteria', $data);
+        }
     }
 
     public function edit_kriteria($id)
     {
-
-
         $username = session('username');
-        // $nama_siswa = session('nama_siswa');
-        // $data['user_data'] = $User->getUserByUsername($username);
-        // $data['user_data'] = $Siswa->getSiswaByNmSiswa($nama_siswa);
+        $data['user_data'] = $this->User->getUserByUsername($username);
         $data = [
             'title' => 'Admin|Edit Kriteria',
         ];
@@ -143,13 +150,16 @@ class KriteriaController extends BaseController
         if (!$this->validate($rules)) {
             $data['title'] = "Admin|Edit Siswa";
             $data['kriteria'] = $this->Kriteria->getKriteriaByID($id);
-
-
-            return view('admin/nilai/edit_kriteria', $data);
+            $role = session('role');
+            $data['role'] = $role;
+            if ($role == 1) {
+                return view('admin/nilai/edit_kriteria', $data);
+            }
+            if ($role == 2) {
+                return view('guru/nilai/edit_kriteria', $data);
+            }
         } else {
-
             // $post = $this->request->getPost(['username', 'password', 'role']);
-
             $this->Kriteria->update($id, [
                 'nama_kriteria' => $this->request->getVar('nama_kriteria'),
                 'kode_kriteria' => $this->request->getVar('kode_kriteria'),

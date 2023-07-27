@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/admin') ?>
+<?= $this->extend('layouts/guru') ?>
 <?= $this->section('content') ?>
 
 <!-- Show/hide Excel file upload form -->

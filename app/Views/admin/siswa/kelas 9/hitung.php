@@ -4,10 +4,16 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800 mr-4">Perhitungan Nilai Kelas 9</h1>
+    </div>
+
+
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Keterangan Kriteria KELAS 9</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Keterangan Kriteria</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -118,19 +124,20 @@
 
                         <tr>
                             <th>No</th>
-                            <th>Kode Kriteria</th>
-                            <?php foreach ($siswa as $val) : ?>
-                                <th><?php echo $val['nama_siswa'] ?></th>
+                            <th>Nama Alternatif</th>
+                            <?php foreach ($kriteria as $val) : ?>
+                                <th>C<?php echo $val->id_kriteria ?></th>
                             <?php endforeach ?>
-
                         </tr>
                     </thead>
                     <tbody>
+
                         <?php $no = 1; ?>
                         <?php foreach ($normalisasi as $key => $value) : ?>
                             <tr>
                                 <td><?php echo $no++; ?></td>
-                                <td><?php echo "C" . $key; ?></td>
+
+                                <td><?php echo $siswa[$key]['nama_siswa'] ?></td>
                                 <?php foreach ($value as $k => $v) : ?>
                                     <td><?php echo $value[$k]; ?></td>
                                 <?php endforeach ?>

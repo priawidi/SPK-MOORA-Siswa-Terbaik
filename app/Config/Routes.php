@@ -11,7 +11,7 @@ $routes = Services::routes();
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('AdminController');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -35,8 +35,8 @@ $routes->get('/', 'AuthController::index', ['filter' => 'authGuard']);
 $routes->get('/login', 'AuthController::index');
 $routes->match(['get', 'post'], 'AuthController/loginAuth', 'AuthController::loginAuth');
 $routes->get('/logout', 'AuthController::logout');
-$routes->get('/admin', 'AdminController::index', ['filter' => 'authGuard']);
-$routes->get('/guru', 'GuruController::index', ['filter' => 'authGuard']);
+$routes->get('/admin', 'AdminController::index', ['filter' => ['authGuard', 'authAdmin']]);
+$routes->get('/guru', 'GuruController::index', ['filter' => ['authGuard', 'authGuru']]);
 $routes->get('/siswa', 'SiswaController::index', ['filter' => 'authGuard']);
 
 //USER
@@ -51,7 +51,7 @@ $routes->get('/datasiswa/(:num)', 'SiswaController::data_siswa/$1', ['filter' =>
 $routes->get('/detailsiswa/(:num)', 'SiswaController::detail_siswa/$1', ['filter' => ['authGuard', 'authGuru']]);
 $routes->match(['get', 'post'], '/addsiswa/(:num)', 'SiswaController::add_siswa/$1', ['filter' => ['authGuard', 'authGuru']]);
 $routes->match(['get', 'post'], '/deletesiswa/(:num)', 'SiswaController::delete_siswa/$1', ['filter' => ['authGuard', 'authGuru']]);
-$routes->match(['get', 'post'], '/editsiswa/(:num)', 'SiswaController::edit_siswa/$1', ['filter' => 'authGuard']);
+$routes->match(['get', 'post'], '/editsiswa/(:num)', 'SiswaController::edit_siswa/$1', ['filter' => ['authGuard', 'authGuru']]);
 
 //KRITERIA
 $routes->get('/kriteria', 'KriteriaController::kriteria', ['filter' => ['authGuard', 'authGuru']]);
@@ -70,7 +70,7 @@ $routes->match(['get', 'post'], '/editnilaisiswa/(:num)', 'SiswaController::edit
 //HASIL PERHITUNGAN
 $routes->get('/hasilhitung/(:num)', 'MooraController::index/$1', ['filter' => 'authGuard']);
 //HASIL RANKING
-$routes->get('/ranking/(:num)', 'MooraController::rank/$1', ['filter' => 'authGuard']);
+$routes->get('/rank', 'MooraController::rank/', ['filter' => 'authGuard']);
 //IMPORT EXCEL
 $routes->get('/importxls', 'DataController::importxls', ['filter' => ['authGuard', 'authGuru']]);
 $routes->post('/savexls/(:num)', 'DataController::save_excel/$1', ['filter' => ['authGuard', 'authGuru']]);

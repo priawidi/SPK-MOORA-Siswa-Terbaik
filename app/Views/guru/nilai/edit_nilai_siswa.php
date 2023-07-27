@@ -1,5 +1,5 @@
 <!-- Begin Page Content -->
-<?= $this->extend('layouts/admin') ?>
+<?= $this->extend('layouts/guru') ?>
 
 <?= $this->section('content') ?>
 
@@ -19,9 +19,9 @@
                     <form action="<?php echo site_url('editnilaisiswa/' . $siswa['id_siswa']); ?>" method="post">
                         <?= csrf_field(); ?>
                         <div class="form-group row">
-                            <label for="nama_siswa" class="col-lg-3 col-form-label">Nama</label>
+                            <label for="nama_siswa" class="col-lg-3 col-form-label">Nama *</label>
                             <div class="col-lg-9">
-                                <a type="text" class="form-control" id="nama_siswa" name="nama_siswa"><?php echo $siswa['nama_siswa']; ?></a>
+                                <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" value="<?php echo $siswa['nama_siswa']; ?>"></input>
                                 <input type="hidden" name="id_siswa" id="id_siswa" value="<?php echo $siswa['id_siswa']; ?>">
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                         foreach ($nilai_siswa as $krit) : ?>
 
                             <div class="form-group row">
-                                <label for="nama_kriteria" class="col-lg-3 col-form-label"><?php echo $krit['nama_kriteria'] . "*" ?></label>
+                                <label for="nama_kriteria" class="col-lg-3 col-form-label"><?php echo $krit['nama_kriteria'] ?></label>
                                 <div class="col-lg-9">
                                     <input type="text" min="0" max="100" class="form-control" name="nilai<?php echo $i; ?>" value="<?php echo $krit['nilai']; ?>">
 

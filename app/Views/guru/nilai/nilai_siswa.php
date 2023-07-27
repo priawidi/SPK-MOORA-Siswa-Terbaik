@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/admin') ?>
+<?= $this->extend('layouts/guru') ?>
 <?= $this->section('content') ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -22,7 +22,6 @@
                                 <th><?php echo $krit['nama_kriteria'] ?></th>
                             <?php endforeach; ?>
                             <th>Action</th>
-
                         </tr>
                     </thead>
                     <tbody>

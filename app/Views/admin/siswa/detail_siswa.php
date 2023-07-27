@@ -16,24 +16,43 @@
                     <h6 class="m-0 font-weight-bold text-primary">Detail Siswa</h6>
                 </div>
                 <div class="card-body">
-                    <img class="card-img-top" src="img.png" alt="Card image">
-                    <h4 class="card-title">Nama : <?php echo $siswa['nama_siswa']; ?></h4>
-                    <h5 class="card-title">Nis : <?php echo $siswa['nis']; ?></h5>
-                    <h5 class="card-title">Kelas : <?php echo $siswa['kelas']; ?></h5>
+
+                    <form action="" method="post">
+                        <div class="form-group row">
+                            <label for="nama_siswa" class="col-lg-3 col-form-label">Nama</label>
+                            <div class="col-lg-9">
+                                <a type="text" class="form-control" id="nama_siswa" name="nama_siswa"><?php echo $siswa['nama_siswa']; ?></a>
+                                <?php echo $validation->getError('nama_siswa'); ?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="nis" class="col-lg-3 col-form-label">NIS</label>
+                            <div class="col-lg-9">
+                                <a type="text" class="form-control" id="nis" name="nis"><?php echo $siswa['nis']; ?></a>
+                                <?php echo $validation->getError('nis'); ?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kelas" class="col-lg-3 col-form-label">Kelas</label>
+                            <div class="col-lg-9">
+                                <a type="text" class="form-control" id="kelas" name="kelas"><?php echo $siswa['kelas']; ?></a>
+                                <?php echo $validation->getError('kelas'); ?>
+                            </div>
+                        </div>
 
 
 
-                    <div class="d-flex mt-4">
-                        <a href="<?php echo site_url('datasiswa'); ?>" class="btn btn-secondary ml-auto">Kembali</a>
+                        <div class="d-flex mt-4">
+                            <a href="<?php echo site_url('datasiswa/' . $siswa['kelas']); ?>" class="btn btn-secondary ml-auto">Kembali</a>
+                            <button data-toggle="modal" data-target="#deleteModal" type="button" class="btn btn-danger ml-3">
+                                Hapus
+                            </button>
 
-                        <button data-toggle="modal" data-target="#deleteModal" type="button" class="btn btn-danger ml-3">
-                            Hapus
-                        </button>
-
-                        <button data-toggle="modal" data-target="#editModal" type="button" class="btn btn-primary ml-3">
-                            Edit
-                        </button>
-                    </div>
+                            <button data-toggle="modal" data-target="#editModal" type="button" class="btn btn-primary ml-3">
+                                Edit Data
+                            </button>
+                        </div>
+                    </form>
 
 
 

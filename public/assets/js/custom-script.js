@@ -6,4 +6,6 @@ $(document).ready(function () {
   $("#dataTable5").DataTable();
   $("#dataTable6").DataTable();
   $("#dataTable7").DataTable({ order: [[3, "asc"]] });
+  $("#dataTable8").DataTable({ order: [[3, "asc"]] });
+  $("#dataTable9").DataTable({ order: [[3, "asc"]] });
 });

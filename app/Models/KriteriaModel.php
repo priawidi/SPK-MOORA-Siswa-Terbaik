@@ -47,12 +47,6 @@ class KriteriaModel extends Model
       return $query->getResultArray();
    }
 
-
-   public function getAllNilaiKriteria()
-   {
-      return $this->db->query("SELECT * FROM nilai_kriteria ")->result_array();
-   }
-
    public function getAllKriteria()
    {
 

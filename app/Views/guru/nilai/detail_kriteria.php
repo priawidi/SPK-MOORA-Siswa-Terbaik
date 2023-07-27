@@ -1,5 +1,5 @@
 <!-- Begin Page Content -->
-<?= $this->extend('layouts/admin') ?>
+<?= $this->extend('layouts/guru') ?>
 
 <?= $this->section('content') ?>
 
@@ -13,42 +13,27 @@
             <!-- Basic Card Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Detail User</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Detail Kriteria</h6>
                 </div>
-
                 <div class="card-body">
-
-                    <form action="" method="post">
-                        <div class="form-group row">
-                            <label for="username" class="col-lg-3 col-form-label">Username</label>
-                            <div class="col-lg-9">
-                                <a type="text" class="form-control" id="username" name="username"><?php echo $user['username']; ?></a>
-                                <?php echo $validation->getError('username'); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="role" class="col-lg-3 col-form-label">Role</label>
-                            <div class="col-lg-9">
-                                <a type="text" class="form-control" id="role" name="role"><?php echo $user['role']; ?></a>
-                                <?php echo $validation->getError('role'); ?>
-                            </div>
-                        </div>
+                    <img class="card-img-top" src="img.png" alt="Card image">
+                    <h4 class="card-title">Nama Kriteria : <?php echo $kriteria['nama_kriteria']; ?></h4>
+                    <h5 class="card-title">Kode : <?php echo $kriteria['kode_kriteria']; ?></h5>
+                    <h5 class="card-title">Jenis Nilai : <?php echo $kriteria['jenis_nilai']; ?></h5>
+                    <h5 class="card-title">Bobot Nilai : <?php echo $kriteria['bobot_nilai']; ?></h5>
 
 
+                    <div class="d-flex mt-4">
+                        <a href="<?php echo site_url('kriteria'); ?>" class="btn btn-secondary ml-auto">Kembali</a>
 
-                        <div class="d-flex mt-4">
-                            <a href="<?php echo site_url('user'); ?>" class="btn btn-secondary ml-auto">Kembali</a>
+                        <button data-toggle="modal" data-target="#deleteModal" type="button" class="btn btn-danger ml-3">
+                            Hapus
+                        </button>
 
-                            <button data-toggle="modal" data-target="#deleteModal" type="button" class="btn btn-danger ml-3">
-                                Hapus
-                            </button>
-
-                            <button data-toggle="modal" data-target="#editModal" type="button" class="btn btn-primary ml-3">
-                                Edit
-                            </button>
-                        </div>
-                    </form>
+                        <button data-toggle="modal" data-target="#editModal" type="button" class="btn btn-primary ml-3">
+                            Edit
+                        </button>
+                    </div>
 
 
 
@@ -65,7 +50,7 @@
                                 <div class="modal-body">Pilih hapus untuk melanjutkan.</div>
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                    <a href="<?php echo site_url() . 'deleteuser/' . $user['id']; ?>" class=" btn btn-danger">Hapus</a>
+                                    <a href="<?php echo site_url() . 'deletekriteria/' . $kriteria['id_kriteria']; ?>" class=" btn btn-danger">Hapus</a>
 
 
                                 </div>
@@ -85,7 +70,7 @@
                                 <div class="modal-body">Pilih edit untuk melanjutkan.</div>
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                    <a class="btn btn-primary" href="<?php echo site_url('edituser/' . $user['id']) ?>">Edit</a>
+                                    <a class="btn btn-primary" href="<?php echo site_url('editkriteria/' . $kriteria['id_kriteria']) ?>">Edit</a>
                                 </div>
                             </div>
                         </div>

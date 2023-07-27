@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/admin') ?>
+<?= $this->extend('layouts/guru') ?>
 <?= $this->section('content') ?>
 
 <!-- Begin Page Content -->
@@ -6,13 +6,14 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800 mr-4">Perhitungan Nilai Kelas 7</h1>
+        <h1 class="h3 mb-0 text-gray-800 mr-4">Perhitungan Nilai Kelas 9</h1>
     </div>
+
 
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Keterangan Kriteria </h6>
+            <h6 class="m-0 font-weight-bold text-primary">Keterangan Kriteria</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -175,7 +176,9 @@
 
                             <tr>
                                 <td><?php echo $no++; ?></td>
+
                                 <td><?php echo $sis[0]->nama_siswa ?></td>
+
                                 <?php foreach ($value as $k => $v) : ?>
                                     <td><?php echo $value[$k]; ?></td>
                                 <?php endforeach; ?>
@@ -209,7 +212,6 @@
                     <tbody>
                         <?php $no = 1; ?>
                         <?php foreach ($tabel_yi as $key => $value) :
-
                             $db = \Config\Database::connect();
                             $sis = $db->table('siswa')->getWhere(['id_siswa' => $key])->getResult(); ?>
 

@@ -16,7 +16,7 @@
     <!-- Custom styles datables -->
     <link href="<?php echo base_url(); ?>assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <!-- Bootstrap library -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
 
 
     <?= $this->renderSection('styles') ?>

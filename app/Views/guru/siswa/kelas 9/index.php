@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/admin') ?>
+<?= $this->extend('layouts/guru') ?>
 <?= $this->section('content') ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -6,41 +6,24 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center mb-4">
         <h1 class="h3 mb-0 text-gray-800 mr-4">List Siswa</h1>
-        <!-- Show/hide Excel file upload form -->
-        <script>
-            function formToggle(ID) {
-                var element = document.getElementById(ID);
-                if (element.style.display === "none") {
-                    element.style.display = "block";
-                } else {
-                    element.style.display = "none";
-                }
-            }
-        </script>
-
-
-        <!-- Import link -->
-        <div class="col-sm">
-            <div class="float-end">
-                <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm1');"><i class="plus"></i> Import Data Kelas 7</a>
-            </div>
-        </div>
-        <!-- Excel file upload form -->
-        <div class="col-sm-8" id="importFrm1" style="display: none;">
-            <form class="row" action="/savexls/<?php echo 7 ?>" method="post" enctype="multipart/form-data">
-                <div class="col-auto">
-
-                    <input type="file" class="form-control" name="fileexcel" id="file1" required accept=".xls, .xlsx" />
-                </div>
-                <div class="col-sm">
-                    <input type="submit" class="btn btn-primary mb-3" name="importSubmit" value="Import">
-                </div>
-            </form>
-        </div>
-
+        <a class="btn btn-primary" href="<?php echo site_url('addsiswa/9'); ?>">Tambah</a>
     </div>
 
-    <!-- DataTables Example -->
+    <?php if (session()->getFlashdata('danger_alert')) : ?>
+        <div class="alert alert-dismissible alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo session()->getFlashdata('danger_alert'); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('success_alert')) : ?>
+        <div class="alert alert-dismissible alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo session()->getFlashdata('success_alert'); ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
@@ -50,6 +33,7 @@
                             <th>Nama</th>
                             <th>NIS</th>
                             <th>Kelas</th>
+
                             <th>Action</th>
                         </tr>
                     </thead>
