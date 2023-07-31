@@ -17,7 +17,7 @@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
         <a class="nav-link" href="/<?php echo $session->get('username') ?>">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
     </li>
 
@@ -31,7 +31,7 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-fw fa-user"></i>
             <span>Data Siswa</span>
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -48,7 +48,7 @@
     <!-- Nav Item - Tables -->
     <li class="nav-item">
         <a class="nav-link" href="<?php echo site_url('nilaisiswa') ?>">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-book"></i>
             <span>Nilai Siswa</span></a>
     </li>
 
@@ -63,7 +63,7 @@
     <!-- Nav Item - Tables -->
     <li class="nav-item">
         <a class="nav-link" href="<?php echo site_url('kriteria') ?>">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-percentage"></i>
             <span>Kriteria</span></a>
     </li>
 

@@ -7,7 +7,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/<?php echo $session->get('username') ?>">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <i class=""></i>
         </div>
         <div class="sidebar-brand-text mx-3">SMPN 272 </div>
     </a>
@@ -16,7 +16,7 @@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
         <a class="nav-link" href="/<?php echo $session->get('username') ?>">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
     </li>
     <!-- Divider -->
@@ -25,7 +25,7 @@
     <li class="nav-item">
         <a class="nav-link" href="<?php echo site_url('rank') ?>">
             <i class="fas fa-fw fa-table"></i>
-            <span>Hasil</span></a>
+            <span>Hasil Ranking</span></a>
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
