@@ -1,5 +1,11 @@
 <!-- Begin Page Content -->
-<?= $this->extend('layouts/admin') ?>
+<?php if ($role == 1) {
+    $this->extend('layouts/admin');
+} else if ($role == 2) {
+    $this->extend('layouts/guru');
+} else if ($role == 3) {
+    $this->extend('layouts/siswa');
+} ?>
 
 <?= $this->section('content') ?>
 
@@ -9,7 +15,7 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <?php $validation =  \Config\Services::validation(); ?>
+
             <!-- Basic Card Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -21,14 +27,14 @@
                             <label for="nama_kriteria" class="col-lg-3 col-form-label">Nama Kriteria*</label>
                             <div class="col-lg-9">
                                 <input type="text" class="form-control" id="nama_kriteria" name="nama_kriteria" value="<?php echo $kriteria['nama_kriteria']; ?>" autofocus>
-                                <?php echo $validation->getError('nama_kriteria'); ?>
+
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="kode_kriteria" class="col-lg-3 col-form-label">Kode Kriteria *</label>
                             <div class="col-lg-9">
                                 <input type="text" class="form-control" id="kode_kriteria" name="kode_kriteria" value="<?php echo $kriteria['kode_kriteria']; ?>" autofocus>
-                                <?php echo $validation->getError('kode_kriteria'); ?>
+
                             </div>
                         </div>
                         <div class="form-group row">
@@ -44,14 +50,14 @@
                                         <option value="0" selected>Cost</option>
                                     <?php endif; ?>
                                 </select>
-                                <?php echo $validation->getError('jenis_nilai'); ?>
+
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="bobot_nilai" class="col-lg-3 col-form-label">Bobot Nilai *</label>
                             <div class="col-lg-9">
                                 <input type="text" class="form-control" id="bobot_nilai" name="bobot_nilai" value="<?php echo $kriteria['bobot_nilai']; ?>" autofocus>
-                                <?php echo $validation->getError('bobot_nilai'); ?>
+
                             </div>
                         </div>
 

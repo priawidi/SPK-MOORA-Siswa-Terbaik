@@ -10,6 +10,8 @@ class AdminController extends BaseController
 
     public function index()
     {
+        $role = session('role');
+        $data['role'] = $role;
         $username = session('username');
         $data['user_data'] = $this->User->getUserByUsername($username);
         $data['kriteria'] = $this->Metode->getKriteriaById();

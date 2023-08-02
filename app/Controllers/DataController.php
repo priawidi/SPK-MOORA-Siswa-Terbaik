@@ -10,7 +10,9 @@ class DataController extends BaseController
     protected $idSis;
     public function importxls()
     {
-        return view('importxls');
+        $role = session('role');
+        $data['role'] = $role;
+        return view('importxls', $data);
     }
 
     public function save_excel($kelas)
@@ -105,6 +107,7 @@ class DataController extends BaseController
                 }
             }
         }
+
         session()->setFlashdata('success_alert', 'Berhasil import excel');
         return redirect()->to('/datasiswa' . '/' . $kelas);
     }

@@ -8,6 +8,9 @@ class GuruController extends BaseController
 {
     public function index()
     {
+
+
+
         return view('guru/index');
     }
 }

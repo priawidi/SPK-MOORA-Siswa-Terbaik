@@ -10,11 +10,7 @@ class SiswaController extends BaseController
   public function index()
   {
 
-    $username = session('username');
-    $data['user_data'] = $this->User->getUserByUsername($username);
-    $data['title'] = "Dashboard Siswa";
-
-    return view('siswa/index', $data,);
+    return view('siswa/index');
   }
   public function data_siswa($kelas)
   {
@@ -28,24 +24,33 @@ class SiswaController extends BaseController
 
 
 
-    if ($role == 1) {
-      if ($kelas == 7) {
-        return view('admin/siswa/kelas 7/index', $data,);
-      } elseif ($kelas == 8) {
-        return view('admin/siswa/kelas 8/index', $data,);
-      } elseif ($kelas == 9) {
-        return view('admin/siswa/kelas 9/index', $data,);
-      }
+
+    if ($kelas == 7) {
+      return view('admin/siswa/kelas 7/index', $data,);
+    } elseif ($kelas == 8) {
+      return view('admin/siswa/kelas 8/index', $data,);
+    } elseif ($kelas == 9) {
+      return view('admin/siswa/kelas 9/index', $data,);
     }
-    if ($role == 2) {
-      if ($kelas == 7) {
-        return view('guru/siswa/kelas 7/index', $data,);
-      } elseif ($kelas == 8) {
-        return view('guru/siswa/kelas 8/index', $data,);
-      } elseif ($kelas == 9) {
-        return view('guru/siswa/kelas 9/index', $data,);
-      }
-    }
+
+    // if ($role == 1) {
+    //   if ($kelas == 7) {
+    //     return view('admin/siswa/kelas 7/index', $data,);
+    //   } elseif ($kelas == 8) {
+    //     return view('admin/siswa/kelas 8/index', $data,);
+    //   } elseif ($kelas == 9) {
+    //     return view('admin/siswa/kelas 9/index', $data,);
+    //   }
+    // }
+    // if ($role == 2) {
+    //   if ($kelas == 7) {
+    //     return view('guru/siswa/kelas 7/index', $data,);
+    //   } elseif ($kelas == 8) {
+    //     return view('guru/siswa/kelas 8/index', $data,);
+    //   } elseif ($kelas == 9) {
+    //     return view('guru/siswa/kelas 9/index', $data,);
+    //   }
+    // }
   }
 
   public function add_siswa($kelas)
@@ -85,6 +90,8 @@ class SiswaController extends BaseController
     ];
     if (!$this->validate($rules)) {
       $data['title'] = "Admin|Tambah Siswa";
+      $role = session('role');
+      $data['role'] = $role;
       $firstChar = substr($kelas, 0, 1);
       return view('admin/siswa/kelas ' . $firstChar . '/importxls', $data);
     } else {
@@ -101,30 +108,39 @@ class SiswaController extends BaseController
     $sis = $this->Siswa->getSiswaByID($id);
     $kelas = $sis['kelas'];
     $this->Siswa->delete($id);
+    $this->Nilai->delete($id);
     session()->setFlashdata('success_alert', 'Siswa berhasil dihapus!');
     return redirect()->to(base_url('datasiswa/' . $kelas));
   }
 
   public function detail_siswa($id)
   {
+
     $role = session('role');
     $data['role'] = $role;
     $data['siswa'] = $this->Siswa->getSiswaByID($id);
+    // $data['kriteria'] = $this->Nilai->getAllNilaiSiswa();
+    $data['nilai_siswa'] = $this->Nilai->getNilaiSiswaByIdSiswa($id);
 
     $data['title'] = "Detail Siswa";
 
-    if ($role == 1) {
-      return view('admin/siswa/detail_siswa', $data);
-    }
 
-    if ($role == 2) {
-      return view('guru/siswa/detail_siswa', $data);
-    }
+
+    return view('admin/siswa/detail_siswa', $data);
+
+    // if ($role == 1) {
+    //   return view('admin/siswa/detail_siswa', $data);
+    // }
+
+    // if ($role == 2) {
+    //   return view('guru/siswa/detail_siswa', $data);
+    // }
   }
 
   public function edit_siswa($id)
   {
-
+    $role = session('role');
+    $data['role'] = $role;
     $username = session('username');
     // $nama_siswa = session('nama_siswa');
     // $data['user_data'] = $User->getUserByUsername($username);
@@ -158,39 +174,52 @@ class SiswaController extends BaseController
         ]
 
       ],
-      'nilai' => [
-        'label'    => 'Nilai Siswa',
-        'rules'    => 'required|trim',
-        'errors'    => [
-          'required'    => 'Nilai Siswa harus diisi.'
-        ]
 
-      ],
 
 
     ];
     if (!$this->validate($rules)) {
       $data['title'] = "Admin|Edit Siswa";
       $data['siswa'] = $this->Siswa->getSiswaByID($id);
+      $data['nilai_siswa'] = $this->Nilai->getNilaiSiswaByIdSiswa($id);
+
       $role = session('role');
       $data['role'] = $role;
 
-      if ($role == 1) {
-        return view('admin/siswa/edit_siswa', $data);
-      }
-      if ($role == 2) {
-        return view('guru/siswa/edit_siswa', $data);
-      }
+
+      return view('admin/siswa/edit_siswa', $data);
+
+      // if ($role == 1) {
+      //   return view('admin/siswa/edit_siswa', $data);
+      // }
+      // if ($role == 2) {
+      //   return view('guru/siswa/edit_siswa', $data);
+      // }
     } else {
       $sis = $this->Siswa->getSiswaByID($id);
       $kelas = $sis['kelas'];
-      $post = $this->request->getPost(['username', 'password', 'role']);
+      // $post = $this->request->getPost(['username', 'password', 'role']);
 
       $this->Siswa->update($id, [
         'nama_siswa' => $this->request->getVar('nama_siswa'),
         'nis' => $this->request->getVar('nis'),
         'kelas' => $this->request->getVar('kelas'),
       ]);
+
+
+      $kriteria = $this->Kriteria->getAllKriteria();
+      $count = count($kriteria);
+      for ($i = 1; $i <= $count; $i++) {
+
+        $data = [
+          'fk_id_kriteria' => $i,
+          'fk_id_siswa' => $this->request->getVar('id_siswa'),
+          'nilai' => $this->request->getVar('nilai' . $i),
+        ];
+
+        $this->Nilai->editNilaiSiswaData($data);
+      }
+
 
       session()->setFlashdata('success_alert', 'Siswa berhasil diubah!');
       return redirect()->to(base_url('datasiswa/' . $kelas));
@@ -219,7 +248,8 @@ class SiswaController extends BaseController
 
   public function add_nilai_siswa($id)
   {
-
+    $role = session('role');
+    $data['role'] = $role;
 
     $username = session('username');
     $data['user_data'] = $this->User->getUserByUsername($username);
@@ -241,12 +271,15 @@ class SiswaController extends BaseController
       $data['kriteria'] = $this->Kriteria->getAllKriteria();
       $role = session('role');
       $data['role'] = $role;
-      if ($role == 1) {
-        return view('admin/nilai/tambah_nilai_siswa', $data);
-      }
-      if ($role == 2) {
-        return view('guru/nilai/tambah_nilai_siswa', $data);
-      }
+
+      return view('admin/nilai/tambah_nilai_siswa', $data);
+
+      // if ($role == 1) {
+      //   return view('admin/nilai/tambah_nilai_siswa', $data);
+      // }
+      // if ($role == 2) {
+      //   return view('guru/nilai/tambah_nilai_siswa', $data);
+      // }
     } else {
       $kriteria = $this->Kriteria->getAllKriteria();
       $count = count($kriteria);
@@ -283,16 +316,21 @@ class SiswaController extends BaseController
     $data['nilai_siswa'] = $this->Nilai->getAllNilaiSiswa();
 
     $data['title'] = "Detail Kriteria";
-    if ($role == 1) {
-      return view('admin/nilai/detail_nilai_siswa', $data);
-    }
-    if ($role == 2) {
-      return view('guru/nilai/detail_nilai_siswa', $data);
-    }
+
+    return view('admin/nilai/detail_nilai_siswa', $data);
+
+    // if ($role == 1) {
+    //   return view('admin/nilai/detail_nilai_siswa', $data);
+    // }
+    // if ($role == 2) {
+    //   return view('guru/nilai/detail_nilai_siswa', $data);
+    // }
   }
 
   public function edit_nilai_siswa($id)
   {
+    $role = session('role');
+    $data['role'] = $role;
     $username = session('username');
     $data['user_data'] = $this->User->getUserByUsername($username);
     $rules = [
@@ -314,12 +352,15 @@ class SiswaController extends BaseController
       $role = session('role');
       $data['role'] = $role;
       if (isset($data['nilai_siswa']) && !empty($data['nilai_siswa'])) {
-        if ($role == 1) {
-          return view('admin/nilai/edit_nilai_siswa', $data);
-        }
-        if ($role == 2) {
-          return view('guru/nilai/edit_nilai_siswa', $data);
-        }
+
+        return view('admin/nilai/edit_nilai_siswa', $data);
+
+        // if ($role == 1) {
+        //   return view('admin/nilai/edit_nilai_siswa', $data);
+        // }
+        // if ($role == 2) {
+        //   return view('guru/nilai/edit_nilai_siswa', $data);
+        // }
       } else {
         $idsis = $this->Siswa->getSiswaByID($id);
         return redirect()->to('addnilaisiswa/' . $idsis['id_siswa']);

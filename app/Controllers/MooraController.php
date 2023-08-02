@@ -139,24 +139,33 @@ class MooraController extends BaseController
         $data['role'] = $role;
 
         $firstchar = substr($id_kelas, 0, 1);
-        if ($role == 1) {
-            if ($firstchar == 7) {
-                return view('admin/siswa/kelas 7/hitung', $data,);
-            } elseif ($firstchar == 8) {
-                return view('admin/siswa/kelas 8/hitung', $data,);
-            } elseif ($firstchar == 9) {
-                return view('admin/siswa/kelas 9/hitung', $data,);
-            }
+
+        if ($firstchar == 7) {
+            return view('admin/siswa/kelas 7/hitung', $data,);
+        } elseif ($firstchar == 8) {
+            return view('admin/siswa/kelas 8/hitung', $data,);
+        } elseif ($firstchar == 9) {
+            return view('admin/siswa/kelas 9/hitung', $data,);
         }
-        if ($role == 2) {
-            if ($firstchar == 7) {
-                return view('guru/siswa/kelas 7/hitung', $data,);
-            } elseif ($firstchar == 8) {
-                return view('guru/siswa/kelas 8/hitung', $data,);
-            } elseif ($firstchar == 9) {
-                return view('guru/siswa/kelas 9/hitung', $data,);
-            }
-        }
+
+        // if ($role == 1) {
+        //     if ($firstchar == 7) {
+        //         return view('admin/siswa/kelas 7/hitung', $data,);
+        //     } elseif ($firstchar == 8) {
+        //         return view('admin/siswa/kelas 8/hitung', $data,);
+        //     } elseif ($firstchar == 9) {
+        //         return view('admin/siswa/kelas 9/hitung', $data,);
+        //     }
+        // }
+        // if ($role == 2) {
+        //     if ($firstchar == 7) {
+        //         return view('guru/siswa/kelas 7/hitung', $data,);
+        //     } elseif ($firstchar == 8) {
+        //         return view('guru/siswa/kelas 8/hitung', $data,);
+        //     } elseif ($firstchar == 9) {
+        //         return view('guru/siswa/kelas 9/hitung', $data,);
+        //     }
+        // }
     }
 
     public function rank()

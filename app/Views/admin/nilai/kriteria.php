@@ -1,4 +1,10 @@
-<?= $this->extend('layouts/admin') ?>
+<?php if ($role == 1) {
+    $this->extend('layouts/admin');
+} else if ($role == 2) {
+    $this->extend('layouts/guru');
+} else if ($role == 3) {
+    $this->extend('layouts/siswa');
+} ?>
 <?= $this->section('content') ?>
 
 <div class="container-fluid">
@@ -7,20 +13,6 @@
         <h1 class="h3 mb-0 text-gray-800 mr-4">Kriteria</h1>
         <a class="btn btn-primary" href="<?php echo site_url('/addkriteria'); ?>">Tambah</a>
     </div>
-
-    <?php if (session()->getFlashdata('danger_alert')) : ?>
-        <div class="alert alert-dismissible alert-danger" role="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo session()->getFlashdata('danger_alert'); ?>
-        </div>
-    <?php endif; ?>
-
-    <?php if (session()->getFlashdata('success_alert')) : ?>
-        <div class="alert alert-dismissible alert-success" role="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo session()->getFlashdata('success_alert'); ?>
-        </div>
-    <?php endif; ?>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">

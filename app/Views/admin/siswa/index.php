@@ -1,4 +1,11 @@
-<?= $this->extend('layouts/admin') ?>
+<?php if ($role == 1) {
+    $this->extend('layouts/admin');
+} else if ($role == 2) {
+    $this->extend('layouts/guru');
+} else if ($role == 3) {
+    $this->extend('layouts/siswa');
+} ?>
+
 <?= $this->section('content') ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">

@@ -35,6 +35,7 @@
                             <label for="role" class="col-lg-3 col-form-label">Role *</label>
                             <div class="col-lg-9">
                                 <select class="form-control" id="role" name="role">
+                                    <option value="1">Admin</option>
                                     <option value="2">Guru</option>
                                     <option value="3">Siswa</option>
                                 </select>

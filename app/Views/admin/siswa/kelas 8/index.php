@@ -1,4 +1,10 @@
-<?= $this->extend('layouts/admin') ?>
+<?php if ($role == 1) {
+    $this->extend('layouts/admin');
+} else if ($role == 2) {
+    $this->extend('layouts/guru');
+} else if ($role == 3) {
+    $this->extend('layouts/siswa');
+} ?>
 <?= $this->section('content') ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -80,9 +86,6 @@
                                 <td>
                                     <a class="badge badge-secondary" href="<?php echo site_url(); ?>detailsiswa/<?php echo $sis['id_siswa']; ?>">
                                         Detail
-                                    </a>
-                                    <a class="badge badge-secondary" href="<?php echo site_url('editnilaisiswa/' . $sis['id_siswa']); ?>">
-                                        Nilai
                                     </a>
 
                                 </td>

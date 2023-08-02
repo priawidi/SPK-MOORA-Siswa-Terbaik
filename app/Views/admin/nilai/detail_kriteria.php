@@ -1,5 +1,11 @@
 <!-- Begin Page Content -->
-<?= $this->extend('layouts/admin') ?>
+<?php if ($role == 1) {
+    $this->extend('layouts/admin');
+} else if ($role == 2) {
+    $this->extend('layouts/guru');
+} else if ($role == 3) {
+    $this->extend('layouts/siswa');
+} ?>
 
 <?= $this->section('content') ?>
 
@@ -9,32 +15,56 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <?php $validation =  \Config\Services::validation(); ?>
+
             <!-- Basic Card Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Detail Kriteria</h6>
                 </div>
                 <div class="card-body">
-                    <img class="card-img-top" src="img.png" alt="Card image">
-                    <h4 class="card-title">Nama Kriteria : <?php echo $kriteria['nama_kriteria']; ?></h4>
-                    <h5 class="card-title">Kode : <?php echo $kriteria['kode_kriteria']; ?></h5>
-                    <h5 class="card-title">Jenis Nilai : <?php echo $kriteria['jenis_nilai']; ?></h5>
-                    <h5 class="card-title">Bobot Nilai : <?php echo $kriteria['bobot_nilai']; ?></h5>
 
+                    <form>
+                        <div class="form-group row">
+                            <label for="nama_kriteria" class="col-lg-3 col-form-label">Nama Kriteria</label>
+                            <div class="col-lg-9">
+                                <a type="text" class="form-control" id="nama_kriteria" name="nama_kriteria"><?php echo $kriteria['nama_kriteria']; ?></a>
 
-                    <div class="d-flex mt-4">
-                        <a href="<?php echo site_url('kriteria'); ?>" class="btn btn-secondary ml-auto">Kembali</a>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kode_kriteria" class="col-lg-3 col-form-label">Kode</label>
+                            <div class="col-lg-9">
+                                <a type="text" class="form-control" id="kode_kriteria" name="kode_kriteria"><?php echo $kriteria['kode_kriteria']; ?></a>
 
-                        <button data-toggle="modal" data-target="#deleteModal" type="button" class="btn btn-danger ml-3">
-                            Hapus
-                        </button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="jenis_nilai" class="col-lg-3 col-form-label">Jenis Nilai</label>
+                            <div class="col-lg-9">
+                                <a type="text" class="form-control" id="jenis_nilai" name="jenis_nilai"> <?php echo $kriteria['jenis_nilai']; ?></a>
 
-                        <button data-toggle="modal" data-target="#editModal" type="button" class="btn btn-primary ml-3">
-                            Edit
-                        </button>
-                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="bobot_nilai" class="col-lg-3 col-form-label">Bobot Nilai</label>
+                            <div class="col-lg-9">
+                                <a type="text" class="form-control" id="bobot_nilai" name="bobot_nilai"> <?php echo $kriteria['bobot_nilai']; ?></a>
 
+                            </div>
+                        </div>
+                        <div class="d-flex mt-4">
+                            <a href="<?php echo site_url('kriteria'); ?>" class="btn btn-secondary ml-auto">Kembali</a>
+
+                            <button data-toggle="modal" data-target="#deleteModal" type="button" class="btn btn-danger ml-3">
+                                Hapus
+                            </button>
+
+                            <button data-toggle="modal" data-target="#editModal" type="button" class="btn btn-primary ml-3">
+                                Edit
+                            </button>
+                        </div>
+
+                    </form>
 
 
                     <!-- Delete Modal-->

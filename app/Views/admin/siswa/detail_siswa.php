@@ -1,5 +1,11 @@
 <!-- Begin Page Content -->
-<?= $this->extend('layouts/admin') ?>
+<?php if ($role == 1) {
+    $this->extend('layouts/admin');
+} else if ($role == 2) {
+    $this->extend('layouts/guru');
+} else if ($role == 3) {
+    $this->extend('layouts/siswa');
+} ?>
 
 <?= $this->section('content') ?>
 
@@ -9,7 +15,7 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <?php $validation =  \Config\Services::validation(); ?>
+
             <!-- Basic Card Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -17,31 +23,45 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="" method="post">
+                    <form>
                         <div class="form-group row">
                             <label for="nama_siswa" class="col-lg-3 col-form-label">Nama</label>
                             <div class="col-lg-9">
                                 <a type="text" class="form-control" id="nama_siswa" name="nama_siswa"><?php echo $siswa['nama_siswa']; ?></a>
-                                <?php echo $validation->getError('nama_siswa'); ?>
+
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="nis" class="col-lg-3 col-form-label">NIS</label>
                             <div class="col-lg-9">
                                 <a type="text" class="form-control" id="nis" name="nis"><?php echo $siswa['nis']; ?></a>
-                                <?php echo $validation->getError('nis'); ?>
+
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="kelas" class="col-lg-3 col-form-label">Kelas</label>
                             <div class="col-lg-9">
                                 <a type="text" class="form-control" id="kelas" name="kelas"><?php echo $siswa['kelas']; ?></a>
-                                <?php echo $validation->getError('kelas'); ?>
+
                             </div>
                         </div>
 
+                        <?php $i = 1;
+                        foreach ($nilai_siswa as $krit) : ?>
+
+                            <div class="form-group row">
+                                <label for="nama_kriteria" class="col-lg-3 col-form-label"><?php echo $krit['nama_kriteria'] ?></label>
+                                <div class="col-lg-9">
+                                    <a type="text" min="0" max="100" class="form-control" name="nilai<?php echo $i; ?>"><?php echo $krit['nilai']; ?></a>
+
+                                    <input type="hidden" name="fk_id_kriteria" value="<?php echo $krit['id_kriteria']; ?>">
+                                </div>
+                            </div>
 
 
+
+                        <?php $i++;
+                        endforeach; ?>
                         <div class="d-flex mt-4">
                             <a href="<?php echo site_url('datasiswa/' . $siswa['kelas']); ?>" class="btn btn-secondary ml-auto">Kembali</a>
                             <button data-toggle="modal" data-target="#deleteModal" type="button" class="btn btn-danger ml-3">

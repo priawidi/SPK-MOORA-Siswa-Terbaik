@@ -36,8 +36,8 @@ $routes->get('/login', 'AuthController::index');
 $routes->match(['get', 'post'], 'AuthController/loginAuth', 'AuthController::loginAuth');
 $routes->get('/logout', 'AuthController::logout');
 $routes->get('/admin', 'AdminController::index', ['filter' => ['authGuard', 'authAdmin']]);
-$routes->get('/guru', 'GuruController::index', ['filter' => ['authGuard', 'authGuru']]);
-$routes->get('/siswa', 'SiswaController::index', ['filter' => 'authGuard']);
+$routes->get('/guru', 'AdminController::index', ['filter' => ['authGuard', 'authGuru']]);
+$routes->get('/siswa', 'AdminController::index', ['filter' => 'authGuard']);
 
 //USER
 $routes->get('/user', 'UserController::manajemen_user', ['filter' => ['authGuard', 'authAdmin']]);
