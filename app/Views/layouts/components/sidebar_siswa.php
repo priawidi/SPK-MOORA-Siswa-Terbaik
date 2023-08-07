@@ -9,13 +9,13 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class=""></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SMPN 272 </div>
+        <div class="sidebar-brand-text mx-3">SPK Siswa Terbaik </div>
     </a>
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="/<?php echo $session->get('username') ?>">
+        <a class="nav-link" href="/siswa">
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
     </li>

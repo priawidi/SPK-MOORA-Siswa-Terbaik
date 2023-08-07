@@ -238,12 +238,15 @@ class SiswaController extends BaseController
     $data['siswa'] = $this->Siswa->getAllSiswa();
     $data['kriteria'] = $this->Kriteria->getAllKriteria();
     $data['title'] = "Manage Nilai Siswa";
-    if ($role == 1) {
-      return view('admin/nilai/nilai_siswa', $data);
-    }
-    if ($role == 2) {
-      return view('guru/nilai/nilai_siswa', $data);
-    }
+
+    return view('admin/nilai/nilai_siswa', $data);
+
+    // if ($role == 1) {
+    //   return view('admin/nilai/nilai_siswa', $data);
+    // }
+    // if ($role == 2) {
+    //   return view('guru/nilai/nilai_siswa', $data);
+    // }
   }
 
   public function add_nilai_siswa($id)

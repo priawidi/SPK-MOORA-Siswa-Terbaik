@@ -16,10 +16,10 @@ class MooraController extends BaseController
         $data['nilai_siswa'] = $this->Nilai->getAllNilaiSiswa();
 
 
-        $alternatif = [];
-        foreach ($this->Nilai->getAllNilaiSiswaBykelas($id_kelas) as $key => $value) {
-            $alternatif[$value['fk_id_siswa']] = $value;
-        }
+        // $alternatif = [];
+        // foreach ($this->Nilai->getAllNilaiSiswaBykelas($id_kelas) as $key => $value) {
+        //     $alternatif[$value['fk_id_siswa']] = $value;
+        // }
         // dd($alternatif[79]['id_siswa']);
         // $data['alt'] = $alternatif;
 
@@ -415,14 +415,17 @@ class MooraController extends BaseController
 
         $role = session('role');
         $data['role'] = $role;
-        if ($role == 1) {
-            return view('admin/peringkat/rank', $data,);
-        }
-        if ($role == 2) {
-            return view('guru/peringkat/rank', $data,);
-        }
-        if ($role == 3) {
-            return view('siswa/peringkat/rank', $data,);
-        }
+
+        return view('admin/peringkat/rank', $data,);
+
+        // if ($role == 1) {
+        //     return view('admin/peringkat/rank', $data,);
+        // }
+        // if ($role == 2) {
+        //     return view('guru/peringkat/rank', $data,);
+        // }
+        // if ($role == 3) {
+        //     return view('siswa/peringkat/rank', $data,);
+        // }
     }
 }

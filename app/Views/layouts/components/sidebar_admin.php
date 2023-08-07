@@ -16,7 +16,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="/<?php echo $session->get('username') ?>">
+        <a class="nav-link" href="/admin">
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
     </li>

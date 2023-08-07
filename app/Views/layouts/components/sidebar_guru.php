@@ -7,7 +7,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/<?php echo $session->get('username') ?>">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <i class=""></i>
         </div>
         <div class="sidebar-brand-text mx-3">SPK Siswa Terbaik </div>
     </a>
@@ -16,7 +16,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="/<?php echo $session->get('username') ?>">
+        <a class="nav-link" href="/guru">
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
     </li>
