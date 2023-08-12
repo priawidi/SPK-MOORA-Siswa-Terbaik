@@ -15,7 +15,7 @@ class MooraController extends BaseController
         $data['siswa'] = $this->Siswa->getAllSiswaBykelas($id_kelas);
         $data['nilai_siswa'] = $this->Nilai->getAllNilaiSiswa();
 
-        if (!empty($this->Nilai->getAllNilaiSiswa())) {
+        if (!empty($this->Nilai->getNilaiSiswaByKelas($id_kelas))) {
             //rumus 1
             $tranpose = [];
 

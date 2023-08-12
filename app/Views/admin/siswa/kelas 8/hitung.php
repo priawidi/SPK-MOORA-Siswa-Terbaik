@@ -107,7 +107,7 @@ $this->Nilai = new NilaiSiswaModel();
                     </thead>
                     <tbody>
                         <?php $no = 1; ?>
-                        <?php if (!empty($this->Nilai->getAllNilaiSiswa())) {
+                        <?php if (!empty($this->Nilai->getNilaiSiswaByKelas(8))) {
                             foreach ($sqrt as $key => $value) : ?>
                                 <tr>
                                     <td><?php echo $no++; ?></td>
@@ -144,7 +144,7 @@ $this->Nilai = new NilaiSiswaModel();
                     <tbody>
 
                         <?php $no = 1; ?>
-                        <?php if (!empty($this->Nilai->getAllNilaiSiswa())) {
+                        <?php if (!empty($this->Nilai->getNilaiSiswaByKelas(8))) {
                             foreach ($normalisasi as $key => $value) : ?>
                                 <tr>
                                     <td><?php echo $no++; ?></td>
@@ -183,7 +183,7 @@ $this->Nilai = new NilaiSiswaModel();
                     </thead>
                     <tbody>
                         <?php $no = 1; ?>
-                        <?php if (!empty($this->Nilai->getAllNilaiSiswa())) {
+                        <?php if (!empty($this->Nilai->getNilaiSiswaByKelas(8))) {
                             foreach ($ternormalisasi as $key => $value) :
                                 $db = \Config\Database::connect();
                                 $sis = $db->table('siswa')->getWhere(['id_siswa' => $key])->getResult(); ?>
@@ -224,7 +224,7 @@ $this->Nilai = new NilaiSiswaModel();
                     </thead>
                     <tbody>
                         <?php $no = 1; ?>
-                        <?php if (!empty($this->Nilai->getAllNilaiSiswa())) {
+                        <?php if (!empty($this->Nilai->getNilaiSiswaByKelas(8))) {
                             foreach ($tabel_yi as $key => $value) :
 
                                 $db = \Config\Database::connect();
@@ -266,7 +266,7 @@ $this->Nilai = new NilaiSiswaModel();
                         <?php $no = 1; ?>
                         <?php $key = 1; ?>
 
-                        <?php if (!empty($this->Nilai->getAllNilaiSiswa())) {
+                        <?php if (!empty($this->Nilai->getNilaiSiswaByKelas(8))) {
                             foreach ($sorted_rank_data as $key => $value) :
 
                         ?>
