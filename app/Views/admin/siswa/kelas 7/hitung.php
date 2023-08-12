@@ -1,9 +1,13 @@
+<?php
+
+use App\Models\NilaiSiswaModel;
+
+$this->Nilai = new NilaiSiswaModel();
+?>
 <?php if ($role == 1) {
     $this->extend('layouts/admin');
 } else if ($role == 2) {
     $this->extend('layouts/guru');
-} else if ($role == 3) {
-    $this->extend('layouts/siswa');
 } ?>
 <?= $this->section('content') ?>
 
@@ -103,14 +107,16 @@
                     </thead>
                     <tbody>
                         <?php $no = 1; ?>
-                        <?php foreach ($sqrt as $key => $value) : ?>
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo "C" . $key; ?></td>
-                                <td><?php echo $value; ?></td>
+                        <?php if (!empty($this->Nilai->getAllNilaiSiswa())) {
+                            foreach ($sqrt as $key => $value) : ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo "C" . $key; ?></td>
+                                    <td><?php echo $value; ?></td>
 
-                            </tr>
-                        <?php endforeach ?>
+                                </tr>
+                        <?php endforeach;
+                        } ?>
                     </tbody>
                 </table>
             </div>
@@ -138,17 +144,19 @@
                     <tbody>
 
                         <?php $no = 1; ?>
-                        <?php foreach ($normalisasi as $key => $value) : ?>
-                            <tr>
-                                <td><?php echo $no++; ?></td>
+                        <?php if (!empty($this->Nilai->getAllNilaiSiswa())) {
+                            foreach ($normalisasi as $key => $value) : ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
 
-                                <td><?php echo $siswa[$key]['nama_siswa'] ?></td>
-                                <?php foreach ($value as $k => $v) : ?>
-                                    <td><?php echo $value[$k]; ?></td>
-                                <?php endforeach ?>
+                                    <td><?php echo $siswa[$key]['nama_siswa'] ?></td>
+                                    <?php foreach ($value as $k => $v) : ?>
+                                        <td><?php echo $value[$k]; ?></td>
+                                    <?php endforeach ?>
 
-                            </tr>
-                        <?php endforeach ?>
+                                </tr>
+                        <?php endforeach;
+                        } ?>
                     </tbody>
                 </table>
             </div>
@@ -175,20 +183,22 @@
                     </thead>
                     <tbody>
                         <?php $no = 1; ?>
-                        <?php foreach ($ternormalisasi as $key => $value) :
-                            $db = \Config\Database::connect();
-                            $sis = $db->table('siswa')->getWhere(['id_siswa' => $key])->getResult(); ?>
+                        <?php if (!empty($this->Nilai->getAllNilaiSiswa())) {
+                            foreach ($ternormalisasi as $key => $value) :
+                                $db = \Config\Database::connect();
+                                $sis = $db->table('siswa')->getWhere(['id_siswa' => $key])->getResult(); ?>
 
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $sis[0]->nama_siswa ?></td>
-                                <?php foreach ($value as $k => $v) : ?>
-                                    <td><?php echo $value[$k]; ?></td>
-                                <?php endforeach; ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $sis[0]->nama_siswa ?></td>
+                                    <?php foreach ($value as $k => $v) : ?>
+                                        <td><?php echo $value[$k]; ?></td>
+                                    <?php endforeach; ?>
 
-                            </tr>
+                                </tr>
 
-                        <?php endforeach ?>
+                        <?php endforeach;
+                        } ?>
                     </tbody>
                 </table>
             </div>
@@ -214,19 +224,21 @@
                     </thead>
                     <tbody>
                         <?php $no = 1; ?>
-                        <?php foreach ($tabel_yi as $key => $value) :
+                        <?php if (!empty($this->Nilai->getAllNilaiSiswa())) {
+                            foreach ($tabel_yi as $key => $value) :
 
-                            $db = \Config\Database::connect();
-                            $sis = $db->table('siswa')->getWhere(['id_siswa' => $key])->getResult(); ?>
+                                $db = \Config\Database::connect();
+                                $sis = $db->table('siswa')->getWhere(['id_siswa' => $key])->getResult(); ?>
 
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $sis[0]->nama_siswa ?></td>
-                                <td><?php echo $max[$key]; ?></td>
-                                <td><?php echo $min[$key]; ?></td>
-                                <td><?php echo $value; ?></td>
-                            </tr>
-                        <?php endforeach ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $sis[0]->nama_siswa ?></td>
+                                    <td><?php echo $max[$key]; ?></td>
+                                    <td><?php echo $min[$key]; ?></td>
+                                    <td><?php echo $value; ?></td>
+                                </tr>
+                        <?php endforeach;
+                        } ?>
                     </tbody>
                 </table>
             </div>
@@ -245,6 +257,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Alternatif</th>
+                            <th>Kelas</th>
                             <th>Nilai Optimasi</th>
                             <th>Ranking</th>
                         </tr>
@@ -253,17 +266,20 @@
                         <?php $no = 1; ?>
                         <?php $key = 1; ?>
 
-                        <?php foreach ($sorted_rank_data as $key => $value) :
+                        <?php if (!empty($this->Nilai->getAllNilaiSiswa())) {
+                            foreach ($sorted_rank_data as $key => $value) :
 
                         ?>
 
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $siswa[$key]['nama_siswa'] ?></td>
-                                <td><?php echo $value['value']; ?></td>
-                                <td><?php echo $value['rank']; ?></td>
-                            </tr>
-                        <?php endforeach ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $siswa[$key]['nama_siswa'] ?></td>
+                                    <td><?php echo $siswa[$key]['kode_kelas'] ?></td>
+                                    <td><?php echo $value['value']; ?></td>
+                                    <td><?php echo $value['rank']; ?></td>
+                                </tr>
+                        <?php endforeach;
+                        } ?>
 
                     </tbody>
                 </table>

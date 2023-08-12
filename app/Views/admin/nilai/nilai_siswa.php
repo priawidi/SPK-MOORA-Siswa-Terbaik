@@ -36,7 +36,7 @@
                         foreach ($siswa as $ns) : ?>
                             <tr>
                                 <td><?php echo $ns['nama_siswa'] ?></td>
-                                <td><?php echo $ns['kelas'] ?></td>
+                                <td><?php echo $ns['kode_kelas'] ?></td>
                                 <?php
                                 foreach ($nilai_siswa as $nsa) :
                                     if ($ns['id_siswa'] == $nsa['fk_id_siswa']) : ?>

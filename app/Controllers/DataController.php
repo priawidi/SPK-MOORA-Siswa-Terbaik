@@ -8,14 +8,9 @@ use App\Controllers\BaseController;
 class DataController extends BaseController
 {
     protected $idSis;
-    public function importxls()
-    {
-        $role = session('role');
-        $data['role'] = $role;
-        return view('importxls', $data);
-    }
 
-    public function save_excel($kelas)
+
+    public function save_excel()
     {
         $file_excel = $this->request->getFile('fileexcel');
         $ext = $file_excel->getClientExtension();
@@ -27,13 +22,19 @@ class DataController extends BaseController
         $spreadsheet = $render->load($file_excel);
         $worksheet = $spreadsheet->getActiveSheet()->toArray();
 
-        // remove header
+        $KodeKelas = $worksheet[1];
+        $subkelas = substr($KodeKelas[0], -2);
+        $kelas = substr($subkelas, 0, 1);
+
         for ($i = 0; $i <= 6; $i++) {
             unset($worksheet[$i]);
         }
+
+
         // dd($worksheet);
-        // ambil id angkatan dari user yang lagi login
         foreach ($worksheet as $col) {
+            // dd($col);
+
             $Nis = $col[1];
             $NamaSiswa = $col[2];
 
@@ -81,13 +82,14 @@ class DataController extends BaseController
 
             //cek kalau data yang diimport double
             if (count($cekNis) > 0) {
-                session()->setFlashdata('message', '<b style="color:red">Data Gagal di Import NIS ada yang sama</b>');
+                session()->setFlashdata('danger_alert', '<b style="color:red">Data Gagal di Import NIS ada yang sama</b>');
                 continue;
             } else {
                 $simpandata = [
                     'nis' => $Nis,
                     'nama_siswa' => $NamaSiswa,
-                    'kelas' => $kelas
+                    'kelas' => $kelas,
+                    'kode_kelas' => $subkelas
                 ];
                 $db->table('siswa')->insert($simpandata);
                 $count = count($DataNilai);
@@ -105,10 +107,11 @@ class DataController extends BaseController
                     ];
                     $this->Nilai->insertNilaiSiswaData($simpannilai);
                 }
+                session()->setFlashdata('success_alert', 'Berhasil import excel');
             }
         }
 
-        session()->setFlashdata('success_alert', 'Berhasil import excel');
+
         return redirect()->to('/datasiswa' . '/' . $kelas);
     }
 }

@@ -26,7 +26,7 @@ class NilaiSiswa extends Migration
                 'unsigned' => true,
             ],
             'nilai' => [
-                'type' => 'INT',
+                'type' => 'FLOAT',
                 'constraint' => 11,
             ],
             'id_kelas' => [

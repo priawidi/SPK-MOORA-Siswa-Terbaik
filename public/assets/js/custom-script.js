@@ -5,7 +5,7 @@ $(document).ready(function () {
   $("#dataTable4").DataTable();
   $("#dataTable5").DataTable();
   $("#dataTable6").DataTable();
-  $("#dataTable7").DataTable({ order: [[3, "asc"]] });
-  $("#dataTable8").DataTable({ order: [[3, "asc"]] });
-  $("#dataTable9").DataTable({ order: [[3, "asc"]] });
+  $("#dataTable7").DataTable({ order: [[4, "asc"]] });
+  $("#dataTable8").DataTable({ order: [[4, "asc"]] });
+  $("#dataTable9").DataTable({ order: [[4, "asc"]] });
 });

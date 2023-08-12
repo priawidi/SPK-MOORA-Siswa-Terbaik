@@ -72,8 +72,8 @@ $routes->get('/hasilhitung/(:num)', 'MooraController::index/$1', ['filter' => 'a
 //HASIL RANKING
 $routes->get('/rank', 'MooraController::rank/', ['filter' => 'authGuard']);
 //IMPORT EXCEL
-$routes->get('/importxls', 'DataController::importxls', ['filter' => ['authGuard', 'authGuru']]);
-$routes->post('/savexls/(:num)', 'DataController::save_excel/$1', ['filter' => ['authGuard', 'authGuru']]);
+
+$routes->post('/savexls', 'DataController::save_excel', ['filter' => ['authGuard', 'authGuru']]);
 //BLOCK ACCESS
 $routes->get('/block', 'AuthController::accessblocked', ['filter' => 'authGuard']);
 /*

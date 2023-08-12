@@ -32,25 +32,6 @@ class SiswaController extends BaseController
     } elseif ($kelas == 9) {
       return view('admin/siswa/kelas 9/index', $data,);
     }
-
-    // if ($role == 1) {
-    //   if ($kelas == 7) {
-    //     return view('admin/siswa/kelas 7/index', $data,);
-    //   } elseif ($kelas == 8) {
-    //     return view('admin/siswa/kelas 8/index', $data,);
-    //   } elseif ($kelas == 9) {
-    //     return view('admin/siswa/kelas 9/index', $data,);
-    //   }
-    // }
-    // if ($role == 2) {
-    //   if ($kelas == 7) {
-    //     return view('guru/siswa/kelas 7/index', $data,);
-    //   } elseif ($kelas == 8) {
-    //     return view('guru/siswa/kelas 8/index', $data,);
-    //   } elseif ($kelas == 9) {
-    //     return view('guru/siswa/kelas 9/index', $data,);
-    //   }
-    // }
   }
 
   public function add_siswa($kelas)

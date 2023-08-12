@@ -1,3 +1,10 @@
+<?php
+
+use App\Models\NilaiSiswaModel;
+
+$this->Nilai = new NilaiSiswaModel();
+?>
+
 <?php if ($role == 1) {
     $this->extend('layouts/admin');
 } else if ($role == 2) {
@@ -25,6 +32,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Alternatif</th>
+                            <th>Kelas</th>
                             <th>Nilai Optimasi</th>
                             <th>Ranking</th>
                         </tr>
@@ -33,17 +41,20 @@
                         <?php $no = 1; ?>
                         <?php $key = 1; ?>
 
-                        <?php foreach ($sorted_rank_data7 as $key => $value) :
+                        <?php if (!empty($this->Nilai->getNilaiSiswaByKelas(7))) {
+                            foreach ($sorted_rank_data7 as $key => $value) :
 
                         ?>
 
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $siswa7[$key]['nama_siswa'] ?></td>
-                                <td><?php echo $value['value7']; ?></td>
-                                <td><?php echo $value['rank7']; ?></td>
-                            </tr>
-                        <?php endforeach ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $siswa7[$key]['nama_siswa'] ?></td>
+                                    <td><?php echo $siswa7[$key]['kode_kelas'] ?></td>
+                                    <td><?php echo $value['value7']; ?></td>
+                                    <td><?php echo $value['rank7']; ?></td>
+                                </tr>
+                        <?php endforeach;
+                        } ?>
 
                     </tbody>
                 </table>
@@ -64,6 +75,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Alternatif</th>
+                            <th>Kelas</th>
                             <th>Nilai Optimasi</th>
                             <th>Ranking</th>
                         </tr>
@@ -72,17 +84,20 @@
                         <?php $no = 1; ?>
                         <?php $key = 1; ?>
 
-                        <?php foreach ($sorted_rank_data8 as $key => $value) :
+                        <?php if (!empty($this->Nilai->getNilaiSiswaByKelas(8))) {
+                            foreach ($sorted_rank_data8 as $key => $value) :
 
                         ?>
 
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $siswa8[$key]['nama_siswa'] ?></td>
-                                <td><?php echo $value['value8']; ?></td>
-                                <td><?php echo $value['rank8']; ?></td>
-                            </tr>
-                        <?php endforeach ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $siswa8[$key]['nama_siswa'] ?></td>
+                                    <td><?php echo $siswa8[$key]['kode_kelas'] ?></td>
+                                    <td><?php echo $value['value8']; ?></td>
+                                    <td><?php echo $value['rank8']; ?></td>
+                                </tr>
+                        <?php endforeach;
+                        } ?>
 
                     </tbody>
                 </table>
@@ -104,6 +119,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Alternatif</th>
+                            <th>Kelas</th>
                             <th>Nilai Optimasi</th>
                             <th>Ranking</th>
                         </tr>
@@ -112,15 +128,18 @@
                         <?php $no = 1; ?>
                         <?php $key = 1; ?>
 
-                        <?php foreach ($sorted_rank_data9 as $key => $value) :
+                        <?php if (!empty($this->Nilai->getNilaiSiswaByKelas(9))) {
+                            foreach ($sorted_rank_data9 as $key => $value) :
                         ?>
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $siswa9[$key]['nama_siswa'] ?></td>
-                                <td><?php echo $value['value9']; ?></td>
-                                <td><?php echo $value['rank9']; ?></td>
-                            </tr>
-                        <?php endforeach ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $siswa9[$key]['nama_siswa'] ?></td>
+                                    <td><?php echo $siswa9[$key]['kode_kelas'] ?></td>
+                                    <td><?php echo $value['value9']; ?></td>
+                                    <td><?php echo $value['rank9']; ?></td>
+                                </tr>
+                        <?php endforeach;
+                        } ?>
 
                     </tbody>
                 </table>

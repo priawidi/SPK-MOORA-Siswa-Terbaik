@@ -13,7 +13,7 @@ use App\Models\SiswaModel;
 use App\Models\KriteriaModel;
 use App\Models\NilaiSiswaModel;
 use App\Models\MetodeModel;
-use App\Models\ImportModel;
+
 
 
 
@@ -55,7 +55,7 @@ abstract class BaseController extends Controller
     protected $Nilai;
     protected $Kriteria;
     protected $Metode;
-    protected $Import;
+
 
 
 
@@ -79,6 +79,5 @@ abstract class BaseController extends Controller
         $this->Kriteria = new KriteriaModel();
         $this->Nilai = new NilaiSiswaModel();
         $this->Metode = new MetodeModel();
-        $this->Import = new ImportModel();
     }
 }

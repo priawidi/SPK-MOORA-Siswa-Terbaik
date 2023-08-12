@@ -1,3 +1,9 @@
+<?php
+
+use App\Models\NilaiSiswaModel;
+
+$this->Nilai = new NilaiSiswaModel();
+?>
 <?php if ($role == 1) {
     $this->extend('layouts/admin');
 } else if ($role == 2) {
@@ -23,12 +29,17 @@
                                 Peringkat 1 Kelas 7
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php foreach ($sorted_rank_data7 as $key => $value) :
+
+                                <?php if (!empty($this->Nilai->getNilaiSiswaByKelas(7))) {
+                                    foreach ($sorted_rank_data7 as $key => $value) :
                                 ?>
-                                    <?php if ($value['rank7'] == 1) : ?>
-                                        <?php echo $siswa7[$key]['nama_siswa'] ?>
+                                        <?php if ($value['rank7'] == 1) : ?>
+                                            <?php echo $siswa7[$key]['nama_siswa'] ?>
                                 <?php endif;
-                                endforeach ?>
+                                    endforeach;
+                                } else {
+                                    echo "-";
+                                } ?>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -48,12 +59,16 @@
                                 Peringkat 1 Kelas 8
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php foreach ($sorted_rank_data8 as $key => $value) :
+                                <?php if (!empty($this->Nilai->getNilaiSiswaByKelas(8))) {
+                                    foreach ($sorted_rank_data8 as $key => $value) :
                                 ?>
-                                    <?php if ($value['rank8'] == 1) : ?>
-                                        <?php echo $siswa8[$key]['nama_siswa'] ?>
+                                        <?php if ($value['rank8'] == 1) : ?>
+                                            <?php echo $siswa8[$key]['nama_siswa'] ?>
                                 <?php endif;
-                                endforeach ?>
+                                    endforeach;
+                                } else {
+                                    echo "-";
+                                } ?>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -75,12 +90,16 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                        <?php foreach ($sorted_rank_data9 as $key => $value) :
+                                        <?php if (!empty($this->Nilai->getNilaiSiswaByKelas(9))) {
+                                            foreach ($sorted_rank_data9 as $key => $value) :
                                         ?>
-                                            <?php if ($value['rank9'] == 1) : ?>
-                                                <?php echo $siswa9[$key]['nama_siswa'] ?>
+                                                <?php if ($value['rank9'] == 1) : ?>
+                                                    <?php echo $siswa9[$key]['nama_siswa'] ?>
                                         <?php endif;
-                                        endforeach ?>
+                                            endforeach;
+                                        } else {
+                                            echo "-";
+                                        } ?>
                                     </div>
                                 </div>
 

@@ -2,16 +2,14 @@
     $this->extend('layouts/admin');
 } else if ($role == 2) {
     $this->extend('layouts/guru');
-} else if ($role == 3) {
-    $this->extend('layouts/siswa');
-} ?>
+}  ?>
 <?= $this->section('content') ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800 mr-4">List Siswa</h1>
+        <h1 class="h3 mb-0 text-gray-800 mr-4">List Siswa Kelas 8</h1>
         <!-- Show/hide Excel file upload form -->
         <script>
             function formToggle(ID) {
@@ -35,7 +33,7 @@
         </div>
         <!-- Excel file upload form -->
         <div class="col-sm-8" id="importFrm1" style="display: none;">
-            <form class="row" action="/savexls/<?php echo 8 ?>" method="post" enctype="multipart/form-data">
+            <form class="row" action="/savexls" method="post" enctype="multipart/form-data">
                 <div class="col-auto">
 
                     <input type="file" class="form-control" name="fileexcel" id="file1" required accept=".xls, .xlsx" />
@@ -82,7 +80,7 @@
                             <tr>
                                 <td><?php echo $sis['nama_siswa'] ?></td>
                                 <td><?php echo $sis['nis'] ?></td>
-                                <td><?php echo $sis['kelas'] ?></td>
+                                <td><?php echo $sis['kode_kelas'] ?></td>
                                 <td>
                                     <a class="badge badge-secondary" href="<?php echo site_url(); ?>detailsiswa/<?php echo $sis['id_siswa']; ?>">
                                         Detail
